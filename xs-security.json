@@ -1,0 +1,27 @@
+{
+  "xsappname": "earningsai-asst-srv",
+  "tenant-mode": "dedicated",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Callback",
+      "description": "Callback access",
+      "grant-as-authority-to-apps": ["xsuaa"]
+    },
+    {
+      "name": "$XSAPPNAME.write",
+      "description": "Write access"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Viewer",
+      "description": "Read-only access",
+      "scope-references": ["$XSAPPNAME.Callback"]
+    }
+  ],
+  "oauth2-configuration": {
+    "redirect-uris": [
+      "https://*.hana.ondemand.com/callback"
+    ]
+  }
+}

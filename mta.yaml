@@ -1,0 +1,64 @@
+_schema-version: "3.3.0"
+ID: EarningsAI-Assistant-ST
+version: 1.0.0
+description: EarningsAI Assistant for Multiple Banks
+
+parameters:
+  enable-parallel-deployments: true
+
+### ===========================================================
+### 📦 MODULE: Python Backend App (earningai-asst-srv)
+### ===========================================================
+modules:
+  - name: earningsai-asst-ST
+    type: python
+    path: scripts
+    parameters:
+      instances: 1
+      memory: 5G
+      disk-quota: 5G
+      buildpack: python_buildpack
+      command: gunicorn server:app --bind 0.0.0.0:$PORT
+      host: earningsai-asst-srv6
+      #domain: cfapps.ap11.hana.ondemand.com
+    properties:
+      FLASK_ENV: PRODUCTION
+      FLASK_APP: server.py
+    
+    # 🔗 Service bindings ( Instances)
+    requires:
+      - name: xsuaa_earningsai
+      - name: dest_earningsai
+
+    build-parameters:
+      builder: custom
+      build-result: .
+      ignore:
+        - __pycache__/
+        - node_modules/
+        - logs/
+      commands:
+        - pip install -r requirements.txt
+
+
+### ===========================================================
+### 🔐 RESOURCE: XSUAA Authentication
+### ===========================================================
+resources:
+  - name: xsuaa_earningsai
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: xs-security.json  # ✅ Points to your XSUAA config file
+      config:
+        xsappname: earningsai-asst-srv
+
+# ### ===========================================================
+# ### 🗃️ RESOURCE: SAP Destination Services
+# ### ===========================================================
+  - name: dest_earningsai
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite

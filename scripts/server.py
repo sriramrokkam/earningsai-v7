@@ -360,7 +360,11 @@ def generate_embeddings():
 
         # Step 3: Update file statuses
         logger.info("Updating file statuses to 'Completed'")
-        update_completed_files(downloaded_files)
+        update_completed_files(
+            documents_dir=documents_dir,
+            images_dir=images_dir,
+            allowed_extensions=IMAGE_EXTENSIONS
+        )
         logger.info("File statuses updated successfully")
 
         return jsonify({"message": "Embeddings generated successfully"}), 200

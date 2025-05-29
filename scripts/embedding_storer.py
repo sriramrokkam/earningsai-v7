@@ -117,26 +117,44 @@ def store_embeddings(vector_store, texts, embeddings, metadatas):
     """Store embeddings and metadata in the HANA database."""
     logger.info(f"Storing {len(embeddings)} embeddings in HANA DB table {vector_store.table_name}")
 
-    def final_clean_metadata(meta):
-        meta = dict(meta)
-        sf = meta.get("source_file", "unknown")
-        logger.debug(f"Initial source_file value: {sf} (type: {type(sf)})")
-        if isinstance(sf, dict):
-            logger.error(f"Final cleaning: source_file is dict, converting to JSON string: {sf}")
-            meta["source_file"] = json.dumps(sf)
-        elif not isinstance(sf, str):
-            logger.error(f"Final cleaning: source_file is not string, converting to str: {sf} (type: {type(sf)})")
-            meta["source_file"] = str(sf)
-        # Ensure all metadata fields are strings where required
-        if "content_hash" in meta and not isinstance(meta["content_hash"], str):
-            meta["content_hash"] = str(meta["content_hash"])
-        if "page" in meta and not isinstance(meta["page"], int):
+    # Commenting out the original dictionary-based logic
+    # def final_clean_metadata(meta):
+    #     meta = dict(meta)
+    #     sf = meta.get("source_file", "unknown")
+    #     logger.debug(f"Initial source_file value: {sf} (type: {type(sf)})")
+    #     if isinstance(sf, dict):
+    #         logger.error(f"Final cleaning: source_file is dict, converting to JSON string: {sf}")
+    #         meta["source_file"] = json.dumps(sf)
+    #     elif not isinstance(sf, str):
+    #         logger.error(f"Final cleaning: source_file is not string, converting to str: {sf} (type: {type(sf)})")
+    #         meta["source_file"] = str(sf)
+    #     # Ensure all metadata fields are strings where required
+    #     if "content_hash" in meta and not isinstance(meta["content_hash"], str):
+    #         meta["content_hash"] = str(meta["content_hash"])
+    #     if "page" in meta and not isinstance(meta["page"], int):
+    #         try:
+    #             meta["page"] = int(meta["page"])
+    #         except Exception:
+    #             meta["page"] = 0
+    #     logger.debug(f"Cleaned metadata: {meta}")
+    #     return meta
+
+    # New flat structure logic
+    def validate_metadata_tuple(meta_tuple):
+        source_file, content_hash, page = meta_tuple
+        if not isinstance(source_file, str):
+            logger.error(f"source_file is not a string, converting: {source_file} (type: {type(source_file)})")
+            source_file = str(source_file)
+        if not isinstance(content_hash, str):
+            logger.error(f"content_hash is not a string, converting: {content_hash} (type: {type(content_hash)})")
+            content_hash = str(content_hash)
+        if not isinstance(page, int):
             try:
-                meta["page"] = int(meta["page"])
+                page = int(page)
             except Exception:
-                meta["page"] = 0
-        logger.debug(f"Cleaned metadata: {meta}")
-        return meta
+                logger.error(f"page is not an integer, defaulting to 0: {page} (type: {type(page)})")
+                page = 0
+        return (source_file, content_hash, page)
 
     filtered_metadatas = []
     filtered_texts = []
@@ -144,15 +162,16 @@ def store_embeddings(vector_store, texts, embeddings, metadatas):
     for i, meta in enumerate(metadatas):
         try:
             logger.debug(f"Processing metadata at index {i}: {meta}")
-            clean_meta = final_clean_metadata(meta)
+            # Assuming meta is now a tuple (source_file, content_hash, page)
+            clean_meta = validate_metadata_tuple(meta)
             filtered_metadatas.append(clean_meta)
             filtered_texts.append(texts[i])
             filtered_embeddings.append(embeddings[i])
         except Exception as e:
-            logger.error(f"Skipping metadata at index {i} due to cleaning error: {e}. Metadata: {meta}")
+            logger.error(f"Skipping metadata at index {i} due to validation error: {e}. Metadata: {meta}")
             continue
     if not filtered_texts:
-        logger.warning("No valid embeddings to store after cleaning. Skipping DB insert.")
+        logger.warning("No valid embeddings to store after validation. Skipping DB insert.")
         return
     try:
         logger.debug(f"Filtered texts: {filtered_texts}")

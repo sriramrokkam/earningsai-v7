@@ -270,10 +270,19 @@ def process_and_store_embeddings(directory_path, force_overwrite_files=None, mod
     # Process PDFs in parallel
     def process_pdf_task():
         transcript_embeddings, non_transcript_embeddings = process_all_pdfs(directory_path, model_name)
-        filtered_transcript_embeddings = [(doc, emb) for doc, emb in transcript_embeddings 
-                                        if doc.metadata.get("source_file") in pdf_files_to_process]
-        filtered_non_transcript_embeddings = [(doc, emb) for doc, emb in non_transcript_embeddings 
-                                            if doc.metadata.get("source_file") in pdf_files_to_process]
+        # Debug: log type of source_file metadata
+        for doc, emb in transcript_embeddings + non_transcript_embeddings:
+            sf = doc.metadata.get("source_file")
+            if not isinstance(sf, str):
+                logger.error(f"source_file metadata is not a string: {sf} (type: {type(sf)})")
+        filtered_transcript_embeddings = [
+            (doc, emb) for doc, emb in transcript_embeddings 
+            if isinstance(doc.metadata.get("source_file"), str) and doc.metadata.get("source_file") in pdf_files_to_process
+        ]
+        filtered_non_transcript_embeddings = [
+            (doc, emb) for doc, emb in non_transcript_embeddings 
+            if isinstance(doc.metadata.get("source_file"), str) and doc.metadata.get("source_file") in pdf_files_to_process
+        ]
         logger.info(f"Filtered to {len(filtered_transcript_embeddings)} PDF transcript embeddings and "
                     f"{len(filtered_non_transcript_embeddings)} PDF non-transcript embeddings for processing")
         return filtered_transcript_embeddings, filtered_non_transcript_embeddings

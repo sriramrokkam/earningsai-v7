@@ -332,57 +332,55 @@ def upload_file():
 @app.route('/api/generate-embeddings', methods=['POST'])
 @require_auth
 def generate_embeddings():
-    """
-    Generate embeddings for downloaded files and update their status to 'Completed'
-    """
+    """Endpoint to generate embeddings for uploaded files."""
+    logger.info("Starting embedding generation process")
+
     try:
-        # Step 1: Download files from the API
-        logger.info("Starting file download from API")
-        download_success, download_count = download_embedding_files(documents_dir, images_dir, IMAGE_EXTENSIONS)
-        if not download_success:
-            logger.error("Failed to download files from API")
-            return jsonify({"error": "Failed to download files from API"}), 500
+        # Step 1: Download files
+        logger.info("Downloading files for embedding generation")
+        downloaded_files = download_embedding_files()
+        if not downloaded_files:
+            logger.warning("No files to process for embeddings")
+            return jsonify({"message": "No files to process"}), 200
 
-        # Step 2: Get list of files in directories after download
-        uploaded_files = set()
-        for directory in [documents_dir, images_dir]:
-            files = [f for f in os.listdir(directory) if f.lower().endswith(tuple(ALLOWED_EXTENSIONS))]
-            for f in files:
-                uploaded_files.add((os.path.join(directory, f), os.path.getmtime(os.path.join(directory, f))))
+        logger.info(f"Downloaded {len(downloaded_files)} files: {downloaded_files}")
 
-        if not uploaded_files:
-            logger.warning("No files found after download")
-            return jsonify({"error": "No files to process after download"}), 400
+        # Step 2: Process and store embeddings
+        for file_path in downloaded_files:
+            try:
+                logger.info(f"Processing file: {file_path}")
+                process_and_store_embeddings(directory_path=os.path.dirname(file_path))
+                logger.info(f"Successfully processed and stored embeddings for file: {file_path}")
+            except Exception as e:
+                logger.error(f"Error processing file {file_path}: {e}", exc_info=True)
 
-        # Step 3: Process and store embeddings
-        logger.info(f"Processing {len(uploaded_files)} files for embeddings")
-        force_overwrite_files = set()
-        process_and_store_embeddings(documents_dir, force_overwrite_files)
+        # Step 3: Update file statuses
+        logger.info("Updating file statuses to 'Completed'")
+        update_completed_files(downloaded_files)
+        logger.info("File statuses updated successfully")
 
-        # Step 4: Reload vector stores
-        global transcript_store, non_transcript_store, excel_non_transcript_store
-        transcript_store, non_transcript_store, excel_non_transcript_store = load_vector_stores()
-        logger.info("Embeddings generated successfully")
+        return jsonify({"message": "Embeddings generated successfully"}), 200
 
-        # Step 5: Update status for each file
-        update_results = update_completed_files(documents_dir, images_dir, ALLOWED_EXTENSIONS)
-
-        # Return status
-        logger.info(f"Completed embeddings generation and status updates. Success: {update_results['success']}, Failed: {update_results['failed']}")
-        return jsonify({
-            "message": "Embeddings generated and file statuses updated",
-            "download_success": download_success,
-            "files_downloaded": download_count,
-            "files_processed": len(uploaded_files),
-            "embeddings_generated": True,
-            "files_updated": update_results['success'],
-            "files_failed": update_results['failed'],
-            "updated_files": update_results['updated_files']
-        }), 200
     except Exception as e:
-        logger.error(f"Error generating embeddings: {str(e)}")
-        return jsonify({"error": f"Error generating embeddings: {str(e)}"}), 500
+        logger.error(f"Error in embedding generation process: {e}", exc_info=True)
+        return jsonify({"error": "Failed to generate embeddings", "details": str(e)}), 500
 
+    # Commenting out the old logic for reference
+    # try:
+    #     files = request.json.get('files', [])
+    #     if not files:
+    #         return jsonify({"error": "No files provided"}), 400
+
+    #     logger.info(f"Files received for embedding generation: {files}")
+    #     for file in files:
+    #         logger.info(f"Processing file: {file}")
+    #         # Old logic for processing files
+    #         # process_and_store_embeddings(file)
+
+    #     return jsonify({"message": "Embeddings generated successfully"}), 200
+    # except Exception as e:
+    #     logger.error(f"Error generating embeddings: {e}", exc_info=True)
+    #     return jsonify({"error": "Failed to generate embeddings", "details": str(e)}), 500
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
     logger.info(f"Starting Flask app on port {port}")

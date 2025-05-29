@@ -172,7 +172,7 @@ def get_file_mappings() -> Dict[str, str]:
         logger.error(f"Error getting file mappings: {str(e)}")
         return {}
 
-def download_embedding_files(documents_dir: str, images_dir: str, image_extensions: set) -> Tuple[bool, int]:
+def download_embedding_files(documents_dir: str, images_dir: str, image_extensions: set) -> List[str]:
     """
     Download Submitted files from the API to local directories
     
@@ -182,14 +182,14 @@ def download_embedding_files(documents_dir: str, images_dir: str, image_extensio
         image_extensions (set): Set of file extensions considered as images
     
     Returns:
-        tuple: (success, count) - Boolean indicating success and count of downloaded files
+        list: List of downloaded file paths
     """
     try:
         # Get authentication token
         token = get_auth_token()
         if not token:
             logger.error("Failed to get authentication token")
-            return False, 0
+            return []
         
         # Fetch Submitted files
         headers = {"Authorization": f"Bearer {token}"}
@@ -199,18 +199,19 @@ def download_embedding_files(documents_dir: str, images_dir: str, image_extensio
         
         if r.status_code != 200:
             logger.error(f"Failed to fetch file list: Status {r.status_code}, Response: {r.text}")
-            return False, 0
+            return []
         
         files = r.json().get('value', [])
         logger.info(f"Found {len(files)} Submitted files")
         
         if not files:
             logger.warning("No Submitted files found")
-            return True, 0
+            return []
         
         # Track successful downloads
         successful_downloads = 0
         total_files = len(files)
+        downloaded_file_paths = []
         
         # Download each file individually
         for file in files:
@@ -237,6 +238,7 @@ def download_embedding_files(documents_dir: str, images_dir: str, image_extensio
                 f.write(file_content)
             logger.info(f"Downloaded: {file_path}")
             successful_downloads += 1
+            downloaded_file_paths.append(file_path)
             
             # Move image files to images_dir
             file_extension = os.path.splitext(file_name)[1].lower()
@@ -247,14 +249,14 @@ def download_embedding_files(documents_dir: str, images_dir: str, image_extensio
         
         if successful_downloads == 0 and total_files > 0:
             logger.error("No files were downloaded successfully")
-            return False, 0
+            return []
         
         logger.info(f"All Submitted files processed: {successful_downloads}/{total_files} downloaded successfully")
-        return True, successful_downloads
+        return downloaded_file_paths
     
     except Exception as e:
         logger.error(f"Error in download_embedding_files: {str(e)}")
-        return False, 0
+        return []
 
 def update_completed_files(documents_dir: str, images_dir: str, allowed_extensions: set) -> Dict[str, Any]:
     """

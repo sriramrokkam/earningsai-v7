@@ -338,7 +338,11 @@ def generate_embeddings():
     try:
         # Step 1: Download files
         logger.info("Downloading files for embedding generation")
-        downloaded_files = download_embedding_files()
+        downloaded_files = download_embedding_files(
+            documents_dir=documents_dir,
+            images_dir=images_dir,
+            image_extensions=IMAGE_EXTENSIONS
+        )
         if not downloaded_files:
             logger.warning("No files to process for embeddings")
             return jsonify({"message": "No files to process"}), 200

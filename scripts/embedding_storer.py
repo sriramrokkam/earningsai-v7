@@ -116,24 +116,50 @@ def compute_file_hash(file_path):
 def store_embeddings(vector_store, texts, embeddings, metadatas):
     """Store embeddings and metadata in the HANA database."""
     logger.info(f"Storing {len(embeddings)} embeddings in HANA DB table {vector_store.table_name}")
+    def final_clean_metadata(meta):
+        meta = dict(meta)
+        sf = meta.get("source_file", "unknown")
+        if isinstance(sf, dict):
+            logger.error(f"Final cleaning: source_file is dict, converting to JSON string: {sf}")
+            meta["source_file"] = json.dumps(sf)
+        elif not isinstance(sf, str):
+            logger.error(f"Final cleaning: source_file is not string, converting to str: {sf} (type: {type(sf)})")
+            meta["source_file"] = str(sf)
+        # Ensure all metadata fields are strings where required
+        if "content_hash" in meta and not isinstance(meta["content_hash"], str):
+            meta["content_hash"] = str(meta["content_hash"])
+        if "page" in meta and not isinstance(meta["page"], int):
+            try:
+                meta["page"] = int(meta["page"])
+            except Exception:
+                meta["page"] = 0
+        return meta
+
+    filtered_metadatas = []
+    filtered_texts = []
+    filtered_embeddings = []
+    for i, meta in enumerate(metadatas):
+        try:
+            clean_meta = final_clean_metadata(meta)
+            filtered_metadatas.append(clean_meta)
+            filtered_texts.append(texts[i])
+            filtered_embeddings.append(embeddings[i])
+        except Exception as e:
+            logger.error(f"Skipping metadata at index {i} due to cleaning error: {e}. Metadata: {meta}")
+            continue
+    if not filtered_texts:
+        logger.warning("No valid embeddings to store after cleaning. Skipping DB insert.")
+        return
     try:
-        filtered_metadatas = [
-            {
-                "source_file": meta.get("source_file", "unknown"),
-                "page": meta.get("page", 0),
-                "content_hash": meta.get("content_hash", "unknown")
-            }
-            for meta in metadatas
-        ]
         vector_store.add_texts(
-            texts=texts,
-            embeddings=embeddings,
+            texts=filtered_texts,
+            embeddings=filtered_embeddings,
             metadatas=filtered_metadatas
         )
-        logger.info(f"✅ Successfully stored {len(embeddings)} embeddings in {vector_store.table_name}")
+        logger.info(f"✅ Successfully stored {len(filtered_embeddings)} embeddings in {vector_store.table_name}")
     except Exception as e:
         logger.error(f"❌ Error storing embeddings in {vector_store.table_name}: {e}")
-        raise
+        # Do not raise, allow process to continue
 
 def delete_embeddings_for_file(table_name, source_file):
     """Remove embeddings for a specific file from a table."""

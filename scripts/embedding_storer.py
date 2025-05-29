@@ -342,12 +342,23 @@ def process_and_store_embeddings(directory_path, force_overwrite_files=None, mod
             if isinstance(sf, dict):
                 logger.error(f"Fixing source_file metadata from dict to string: {sf}")
                 meta = dict(meta)
+                meta["source_file"] = json.dumps(sf)  # Use JSON string for dicts
+            elif not isinstance(sf, str):
+                meta = dict(meta)
                 meta["source_file"] = str(sf)
             return meta
 
         transcript_metadatas = [
             clean_metadata({**doc.metadata, "content_hash": pdf_files_info.get(doc.metadata.get("source_file"))})
             for doc, _ in filtered_transcript_embeddings
+        ]
+        non_transcript_metadatas = [
+            clean_metadata({**doc.metadata, "content_hash": pdf_files_info.get(doc.metadata.get("source_file"))})
+            for doc, _ in filtered_non_transcript_embeddings
+        ]
+        excel_non_transcript_metadatas = [
+            clean_metadata({**doc.metadata, "content_hash": excel_files_info.get(doc.metadata.get("source_file"))})
+            for doc, _ in filtered_excel_embeddings
         ]
         if transcript_texts:
 

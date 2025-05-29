@@ -116,9 +116,11 @@ def compute_file_hash(file_path):
 def store_embeddings(vector_store, texts, embeddings, metadatas):
     """Store embeddings and metadata in the HANA database."""
     logger.info(f"Storing {len(embeddings)} embeddings in HANA DB table {vector_store.table_name}")
+
     def final_clean_metadata(meta):
         meta = dict(meta)
         sf = meta.get("source_file", "unknown")
+        logger.debug(f"Initial source_file value: {sf} (type: {type(sf)})")
         if isinstance(sf, dict):
             logger.error(f"Final cleaning: source_file is dict, converting to JSON string: {sf}")
             meta["source_file"] = json.dumps(sf)
@@ -133,6 +135,7 @@ def store_embeddings(vector_store, texts, embeddings, metadatas):
                 meta["page"] = int(meta["page"])
             except Exception:
                 meta["page"] = 0
+        logger.debug(f"Cleaned metadata: {meta}")
         return meta
 
     filtered_metadatas = []
@@ -140,6 +143,7 @@ def store_embeddings(vector_store, texts, embeddings, metadatas):
     filtered_embeddings = []
     for i, meta in enumerate(metadatas):
         try:
+            logger.debug(f"Processing metadata at index {i}: {meta}")
             clean_meta = final_clean_metadata(meta)
             filtered_metadatas.append(clean_meta)
             filtered_texts.append(texts[i])
@@ -151,6 +155,9 @@ def store_embeddings(vector_store, texts, embeddings, metadatas):
         logger.warning("No valid embeddings to store after cleaning. Skipping DB insert.")
         return
     try:
+        logger.debug(f"Filtered texts: {filtered_texts}")
+        logger.debug(f"Filtered embeddings: {filtered_embeddings}")
+        logger.debug(f"Filtered metadatas: {filtered_metadatas}")
         vector_store.add_texts(
             texts=filtered_texts,
             embeddings=filtered_embeddings,

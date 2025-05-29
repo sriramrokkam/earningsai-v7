@@ -193,7 +193,7 @@ def download_embedding_files(documents_dir: str, images_dir: str, image_extensio
         
         # Fetch Submitted files
         headers = {"Authorization": f"Bearer {token}"}
-        file_list_url = f"{EMBEDDING_API_BASE_URL}?$filter=status eq 'Submitted'"
+        file_list_url = f"{EMBEDDING_API_BASE_URL}?$filter=status eq 'Approved'"
         logger.info(f"Fetching file list from {file_list_url}")
         r = requests.get(file_list_url, headers=headers)
         
@@ -280,7 +280,7 @@ def update_completed_files(documents_dir: str, images_dir: str, allowed_extensio
         fail_count = 0
         updated_files = []
         
-        # Process files from both directories
+        # Ensure that only files with 'Approved' status are updated to 'Completed'
         for directory in [documents_dir, images_dir]:
             files = [f for f in os.listdir(directory) if os.path.splitext(f)[1].lower() in allowed_extensions]
             logger.info(f"Found {len(files)} files in {directory} to update status")

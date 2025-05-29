@@ -336,8 +336,17 @@ def process_and_store_embeddings(directory_path, force_overwrite_files=None, mod
                 delete_embeddings_for_file(pdf_transcript_table, source_file)
         transcript_texts = [doc.page_content for doc, _ in filtered_transcript_embeddings]
         transcript_embeds = [embedding for _, embedding in filtered_transcript_embeddings]
+        # Clean metadata: ensure 'source_file' is always a string
+        def clean_metadata(meta):
+            sf = meta.get("source_file")
+            if isinstance(sf, dict):
+                logger.error(f"Fixing source_file metadata from dict to string: {sf}")
+                meta = dict(meta)
+                meta["source_file"] = str(sf)
+            return meta
+
         transcript_metadatas = [
-            {**doc.metadata, "content_hash": pdf_files_info.get(doc.metadata.get("source_file"))}
+            clean_metadata({**doc.metadata, "content_hash": pdf_files_info.get(doc.metadata.get("source_file"))})
             for doc, _ in filtered_transcript_embeddings
         ]
         if transcript_texts:
@@ -364,7 +373,7 @@ def process_and_store_embeddings(directory_path, force_overwrite_files=None, mod
         non_transcript_texts = [doc.page_content for doc, _ in filtered_non_transcript_embeddings]
         non_transcript_embeds = [embedding for _, embedding in filtered_non_transcript_embeddings]
         non_transcript_metadatas = [
-            {**doc.metadata, "content_hash": pdf_files_info.get(doc.metadata.get("source_file"))}
+            clean_metadata({**doc.metadata, "content_hash": pdf_files_info.get(doc.metadata.get("source_file"))})
             for doc, _ in filtered_non_transcript_embeddings
         ]
 
@@ -392,7 +401,7 @@ def process_and_store_embeddings(directory_path, force_overwrite_files=None, mod
         excel_non_transcript_texts = [doc.page_content for doc, _ in filtered_excel_embeddings]
         excel_non_transcript_embeds = [embedding for _, embedding in filtered_excel_embeddings]
         excel_non_transcript_metadatas = [
-            {**doc.metadata, "content_hash": excel_files_info.get(doc.metadata.get("source_file"))}
+            clean_metadata({**doc.metadata, "content_hash": excel_files_info.get(doc.metadata.get("source_file"))})
             for doc, _ in filtered_excel_embeddings
         ]
         if excel_non_transcript_texts:

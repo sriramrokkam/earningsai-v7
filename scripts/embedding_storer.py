@@ -352,14 +352,24 @@ def process_and_store_embeddings(directory_path, force_overwrite_files=None, mod
             clean_metadata({**doc.metadata, "content_hash": pdf_files_info.get(doc.metadata.get("source_file"))})
             for doc, _ in filtered_transcript_embeddings
         ]
+        # Add this debug log to catch any dicts in transcript_metadatas
+        for meta in transcript_metadatas:
+            if isinstance(meta.get("source_file"), dict):
+                logger.error(f"FATAL: source_file is still a dict in transcript_metadatas: {meta}")
         non_transcript_metadatas = [
             clean_metadata({**doc.metadata, "content_hash": pdf_files_info.get(doc.metadata.get("source_file"))})
             for doc, _ in filtered_non_transcript_embeddings
         ]
+        for meta in non_transcript_metadatas:
+            if isinstance(meta.get("source_file"), dict):
+                logger.error(f"FATAL: source_file is still a dict in non_transcript_metadatas: {meta}")
         excel_non_transcript_metadatas = [
             clean_metadata({**doc.metadata, "content_hash": excel_files_info.get(doc.metadata.get("source_file"))})
             for doc, _ in filtered_excel_embeddings
         ]
+        for meta in excel_non_transcript_metadatas:
+            if isinstance(meta.get("source_file"), dict):
+                logger.error(f"FATAL: source_file is still a dict in excel_non_transcript_metadatas: {meta}")
         if transcript_texts:
 
             #$$$$ SR: SOC 1:

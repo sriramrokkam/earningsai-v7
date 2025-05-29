@@ -1,0 +1,7 @@
+2025-05-29T15:59:51.81+0000 [APP/PROC/WEB/0] ERR 2025-05-29 15:59:51,816 - INFO - Created embeddings for 257 docs
+   2025-05-29T15:59:51.81+0000 [APP/PROC/WEB/0] OUT ✅ Created 257 embeddings for BCS_Transcripts_1Q25.pdf
+   2025-05-29T15:59:51.81+0000 [APP/PROC/WEB/0] OUT Total transcript embeddings: 257
+   2025-05-29T15:59:51.81+0000 [APP/PROC/WEB/0] OUT Total non-transcript embeddings: 0
+   2025-05-29T15:59:51.81+0000 [APP/PROC/WEB/0] ERR 2025-05-29 15:59:51 - earnings_analysis - INFO - embedding_storer.py:286 - Filtered to 257 PDF transcript embeddings and 0 PDF non-transcript embeddings for processing
+   2025-05-29T15:59:51.81+0000 [APP/PROC/WEB/0] ERR 2025-05-29 15:59:51,817 - INFO - Filtered to 257 PDF transcript embeddings and 0 PDF non-transcript embeddings for processing
+   2025-05-29T15:59:51.81+0000 [APP/PROC/WEB/0] ERR 2025-05-29 15:59:51,818 - ERROR - Error generating embeddings: unhashable type: 'dict'

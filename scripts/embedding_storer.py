@@ -321,6 +321,7 @@ def process_and_store_embeddings(directory_path, force_overwrite_files=None, mod
     if not pdf_files_to_process and not excel_files_to_process:
         logger.info("No new or changed files to process")
         return
+    
     # Process PDFs in parallel
     def process_pdf_task():
         transcript_embeddings, non_transcript_embeddings = process_all_pdfs(directory_path, model_name)
@@ -359,7 +360,7 @@ def process_and_store_embeddings(directory_path, force_overwrite_files=None, mod
     # SOC: SRIRAM 28.05.2025 -- Proxy Initialization
     #embedding_model = init_embedding_model(model_name)
     from gen_ai_hub.proxy import GenAIHubProxyClient
-    logger.info("Embedding_Storer: AIC", {AIC_CREDENTIALS})
+    logger.info(f"Embedding_Storer: AIC {json.dumps(AIC_CREDENTIALS)}")
 
     proxy_client = GenAIHubProxyClient(
                                 base_url = AIC_CREDENTIALS['aic_base_url'],

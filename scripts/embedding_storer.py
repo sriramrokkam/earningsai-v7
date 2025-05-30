@@ -320,6 +320,7 @@ def process_and_store_embeddings(directory_path, force_overwrite_files=None, mod
             elif f in force_overwrite_files:
                 logger.info(f"Forced overwrite requested for Excel {f}")
                 excel_files_to_process.add(f)
+        logger.debug(f"File: {f}, Current Hash: {current_hash}, Existing Hash: {existing_file_info.get(f)}")
     logger.info(f"Found {len(pdf_files_info)} PDF files, {len(pdf_files_to_process)} need processing")
     logger.info(f"Found {len(excel_files_info)} Excel files, {len(excel_files_to_process)} need processing")
     if not pdf_files_to_process and not excel_files_to_process:

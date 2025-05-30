@@ -1,0 +1,572 @@
+/* Base Styles */
+body.sapUiBody {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.sapTntToolHeader {
+    background: white;
+    color: #007aff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+}
+
+.appleBtn {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: rgba(0, 122, 255, 0.1);
+    color: #007aff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.appleBtn:hover {
+    background: rgba(0, 122, 255, 0.2);
+}
+
+/* Navigation */
+.sapMSplitContainerMaster {
+    width: 280px;
+    position: fixed;
+    height: calc(100vh - 3.5rem);
+    top: 3.5rem;
+    left: -280px;
+    background: rgba(249, 249, 249, 0.98);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 100;
+    padding: 1.5rem 0;
+    overflow-y: auto;
+}
+
+.navItem {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    margin: 0 0.5rem 0.25rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #333;
+    transition: all 0.2s ease;
+}
+
+.navItem:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.navItem.selected {
+    background: rgba(0, 122, 255, 0.15);
+    color: #007aff;
+}
+
+.navIcon {
+    margin-right: 0.875rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.125rem;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.navItem.selected .navIcon {
+    background: #007aff;
+    color: white;
+}
+
+/* Main Content */
+.sapMPage {
+    margin-left: 0;
+    padding: 2rem;
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+/* Input Area */
+.input-area textarea {
+    width: 100%;
+    min-height: 100px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+    resize: vertical;
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+    color: #444;
+    background: #fff;
+}
+
+.input-area textarea:focus {
+    border-color: #007aff;
+    outline: none;
+}
+
+.recording-indicator {
+    display: none;
+    color: #007aff;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    text-align: center;
+    padding: 0.25rem;
+    border-radius: 4px;
+    background: rgba(0, 122, 255, 0.1);
+}
+
+.recording-indicator.active {
+    display: block;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: #007aff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.5rem;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.btn svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: currentColor;
+}
+
+.btn:hover {
+    background: #0066d6;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-upload,
+.btn-mic {
+    background: rgba(0, 122, 255, 0.1);
+    color: #007aff;
+}
+
+.btn-upload:hover,
+.btn-mic:hover {
+    background: rgba(0, 122, 255, 0.2);
+}
+
+.btn-mic.recording {
+    background: rgba(255, 59, 48, 0.1);
+    color: #ff3b30;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Response Area */
+.response-area {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.response-card {
+    padding: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.response-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 2rem;
+    background: linear-gradient(90deg, rgba(0, 122, 255, 0.08), rgba(0, 122, 255, 0.02));
+    border-bottom: 1px solid rgba(0, 122, 255, 0.15);
+}
+
+.response-title {
+    font-size: 1.5rem;
+    color: #007aff;
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.response-content-wrapper {
+    padding: 2rem;
+    overflow-x: auto;
+}
+
+.response-content {
+    line-height: 1.2;
+    color: #333;
+    font-size: 1rem;
+}
+
+/* Enhanced Heading Styles */
+.response-content h1,
+.response-content h2,
+.response-content h3,
+.response-content h4,
+.response-content h5,
+.response-content h6 {
+    margin: 2rem 0 1rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+}
+
+.response-content h1 {
+    font-size: 2rem;
+    color: #007aff;
+    border-bottom: 3px solid rgba(0, 122, 255, 0.25);
+    padding-bottom: 0.5rem;
+}
+
+.response-content h2 {
+    font-size: 1.75rem;
+    color: #005bb5;
+    border-left: 4px solid #005bb5;
+    padding-left: 1rem;
+}
+
+.response-content h3 {
+    font-size: 1.5rem;
+    color: #003d82;
+    border-left: 3px solid rgba(0, 61, 130, 0.3);
+    padding-left: 0.5rem;
+}
+
+.response-content h4 {
+    font-size: 1.25rem;
+    color: #002b5c;
+}
+
+.response-content h5 {
+    font-size: 1.15rem;
+    color: #001a3d;
+}
+
+.response-content h6 {
+    font-size: 1.05rem;
+    color: #333;
+    font-style: italic;
+}
+
+/* Enhanced Paragraph and List Styles */
+.response-content p {
+    margin: 1rem 0;
+    color: #444;
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+.response-content ul,
+.response-content ol {
+    margin: 1rem 0;
+    padding-left: 2.5rem;
+}
+
+.response-content ul {
+    list-style-type: none;
+}
+
+.response-content ul li {
+    position: relative;
+    margin: 0.75rem 0;
+    color: #333;
+}
+
+.response-content ul li:before {
+    content: "•";
+    color: #007aff;
+    font-size: 1.5rem;
+    position: absolute;
+    left: -1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.response-content ol {
+    list-style-type: decimal;
+}
+
+.response-content ol li {
+    margin: 0.75rem 0;
+    color: #333;
+}
+
+/* Enhanced Table Styles */
+.response-content table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 1.5rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.response-content th,
+.response-content td {
+    padding: 1rem;
+    border: 1px solid rgba(0, 122, 255, 0.15);
+    text-align: left;
+    color: #333;
+}
+
+.response-content th {
+    background: rgba(0, 122, 255, 0.1);
+    color: #005bb5;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+}
+
+.response-content td {
+    background: #fff;
+}
+
+.response-content tr:nth-child(even) td {
+    background: rgba(0, 122, 255, 0.02);
+}
+
+/* Animations */
+.spinner {
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+    margin-right: 0.5rem;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    color: #666;
+    font-style: italic;
+}
+
+.card.loading::before {
+    content: '';
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid rgba(0, 122, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #007aff;
+    animation: spin 1s linear infinite;
+    margin-right: 0.5rem;
+}
+
+/* Status Messages */
+.upload-status-success {
+    color: #28a745;
+}
+
+.upload-status-error {
+    color: #dc3545;
+}
+
+.upload-status-loading {
+    color: #007aff;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.modal-btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal-btn-confirm {
+    background: #007aff;
+    color: white;
+}
+
+.modal-btn-confirm:hover {
+    background: #0066d6;
+}
+
+.modal-btn-cancel {
+    background: rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+.modal-btn-cancel:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    color: #666;
+    background: white;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    margin-top: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sapMPage {
+        padding: 1rem;
+    }
+
+    .card {
+        padding: 1.5rem;
+    }
+
+    .button-group {
+        justify-content: space-between;
+    }
+
+    .response-header {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+
+    .response-title {
+        font-size: 1.25rem;
+    }
+
+    .response-content-wrapper {
+        padding: 1.5rem;
+    }
+
+    .response-content h1 {
+        font-size: 1.75rem;
+    }
+
+    .response-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .response-content h3 {
+        font-size: 1.25rem;
+    }
+
+    .response-content h4 {
+        font-size: 1.15rem;
+    }
+
+    .response-content h5 {
+        font-size: 1.05rem;
+    }
+
+    .response-content h6 {
+        font-size: 1rem;
+    }
+
+    .response-content table {
+        font-size: 0.9rem;
+    }
+
+    .response-content th,
+    .response-content td {
+        padding: 0.75rem;
+    }
+}

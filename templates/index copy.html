@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSight.Intelligence</title>
+    <link href="https://urldefense.com/v3/__https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap__;!!ASp95G87aa5DoyK5mB3l!4tNe3B3H2jb4GNwZad38Lv_CX6uPa9qvmOkEZToBzsD3bem8jzt7UIbpfSqOZZq21pd3LJkM3Hb3RDyhaWcHQqo$ " rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="sapUiBody">
+    <!-- Header -->
+    <header class="sapTntToolHeader">
+        <button id="sideNavToggleBtn" class="appleBtn" aria-label="Toggle Navigation">
+            <span style="font-size: 1.25rem;">≡</span>
+        </button>
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="FinSight.Intelligence Logo" height="40">
+        <div style="flex: 1;"></div>
+    </header>
+
+    <!-- Side Navigation -->
+    <nav id="sideNav" class="sapMSplitContainerMaster">
+        <div style="padding: 0 1.5rem 1.5rem;">
+            <h3 style="margin: 0; color: #3c3c3c; font-size: 1.2rem;">FinSight Intelligence</h3>
+            <p style="margin: 0.5rem 0 0; font-size: 0.85rem; color: #8e8e93;">Navigation</p>
+        </div>
+        <div class="sapMList" style="background: transparent;">
+            <div class="navItem selected">
+                <span class="navIcon">📊</span>
+                <span>Dashboard</span>
+            </div>
+            <div class="navItem" >
+                <span class="navIcon">🔍</span>
+                <span>Analysis Client</span>
+            </div>
+            <div class="navItem">
+                <span class="navIcon">📁</span>
+                <span>File Manager</span>
+            </div>
+            <div class="navItem">
+                <span class="navIcon">📈</span>
+                <span>Reports</span>
+            </div>
+            <div class="navItem">
+                <span class="navIcon">⚙️</span>
+                <span>Settings</span>
+            </div>
+            <div class="navItem">
+                <span class="navIcon">❓</span>
+                <span>Help</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="sapMPage">
+        <section class="card">
+            <div class="input-area">
+                <textarea id="userInput" placeholder="Type your question here..." required>{{ request.form['userInput'] if request.method == 'POST' else '' }}</textarea>
+                <div class="recording-indicator" id="recordingIndicator">Listening... Speak now</div>
+                <div class="button-group">
+                    <input type="file" id="fileInput" accept=".pdf,.txt,.docx,.doc" style="display: none;">
+                    <button class="btn btn-upload" id="uploadButton" title="Upload Document">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                    </button>
+                    <button class="btn btn-mic" id="micButton" title="Start Voice Input">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            <line x1="12" y1="19" x2="12" y2="23"></line>
+                            <line x1="8" y1="23" x2="16" y2="23"></line>
+                        </svg>
+                    </button>
+                    <button class="btn" id="sendButton">Ask FinSight</button>
+                    <button class="btn" id="generateEmbeddingsButton" disabled>Generate Embeddings</button>
+                </div>
+                <div id="uploadStatus" style="text-align: right; font-size: 0.9rem; margin-top: 0.5rem;"></div>
+            </div>
+        </section>
+        <section class="response-area" id="responseArea"></section>
+    </main>
+
+    <!-- Modal -->
+    <div id="overwriteModal" class="modal">
+        <div class="modal-content">
+            <p id="modalMessage"></p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-confirm" id="modalConfirm">Yes</button>
+                <button class="modal-btn modal-btn-cancel" id="modalCancel">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="sapTntToolHeader sapMPageFooter">
+        <div style="width: 100%; text-align: center;">
+            <span>An Aspire Solution &copy; 2025</span>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://urldefense.com/v3/__https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js__;!!ASp95G87aa5DoyK5mB3l!4tNe3B3H2jb4GNwZad38Lv_CX6uPa9qvmOkEZToBzsD3bem8jzt7UIbpfSqOZZq21pd3LJkM3Hb3RDyhrLHtCUw$ "></script>
+    <script src="https://urldefense.com/v3/__https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js__;!!ASp95G87aa5DoyK5mB3l!4tNe3B3H2jb4GNwZad38Lv_CX6uPa9qvmOkEZToBzsD3bem8jzt7UIbpfSqOZZq21pd3LJkM3Hb3RDyh0dwq0DE$ "></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+ 
+    <script>
+        document.getElementById('sideNavToggleBtn').addEventListener('click', () => {
+            const sideNav = document.getElementById('sideNav');
+            const isOpen = sideNav.style.left === '0px';
+            
+            sideNav.style.left = isOpen ? '-280px' : '0';
+            
+            if (!isOpen) {
+                const overlay = document.createElement('div');
+                overlay.id = 'sideNavOverlay';
+                overlay.style.cssText = `
+                    position: fixed;
+                    top: 3.5rem;
+                    left: 0;
+                    width: 100%;
+                    height: calc(100vh - 3.5rem);
+                    background: rgba(0, 0, 0, 0.15);
+                    z-index: 50;
+                `;
+                overlay.addEventListener('click', () => {
+                    sideNav.style.left = '-280px';
+                    overlay.remove();
+                });
+                document.body.appendChild(overlay);
+            } else {
+                document.getElementById('sideNavOverlay')?.remove();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+// {
+//     "AICORE_AUTH_URL": "https://core-foundational-12982zqn.authentication.ap11.hana.ondemand.com/oauth/token",
+//     "AICORE_CLIENT_ID": "sb-62c837c5-218b-4736-bc14-5852a02a313f!b5156|xsuaa_std!b15301",
+//     "AICORE_CLIENT_SECRET": "03019e1c-4ec9-4c57-8968-4ce79a1f572e$KMcCBVldB7zuqgAFxdvCS3yfog9hhFwrjzQv8mLPTpE=",
+//     "AICORE_RESOURCE_GROUP": "default",
+//     "AICORE_BASE_URL": "https://api.ai.prod-ap11.ap-southeast-1.aws.ml.hana.ondemand.com/v2"
+//   }

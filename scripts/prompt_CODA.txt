@@ -1,0 +1,163 @@
+
+@prefix rdf: <https://urldefense.com/v3/__http://www.w3.org/1999/02/22-rdf-syntax-ns*__;Iw!!ASp95G87aa5DoyK5mB3l!9K-y0uH9ztTrcKOkwq1kFEHHeXWOyBn3VGnZ4CZ5L23FB-jLzbSApK4GjGMdI-fFBXNkovt3zLgRZDyohG7Zo3SgUA$ > .
+@prefix rdfs: <https://urldefense.com/v3/__http://www.w3.org/2000/01/rdf-schema*__;Iw!!ASp95G87aa5DoyK5mB3l!9K-y0uH9ztTrcKOkwq1kFEHHeXWOyBn3VGnZ4CZ5L23FB-jLzbSApK4GjGMdI-fFBXNkovt3zLgRZDyohG7qSr-nSg$ > .
+@prefix owl: <https://urldefense.com/v3/__http://www.w3.org/2002/07/owl*__;Iw!!ASp95G87aa5DoyK5mB3l!9K-y0uH9ztTrcKOkwq1kFEHHeXWOyBn3VGnZ4CZ5L23FB-jLzbSApK4GjGMdI-fFBXNkovt3zLgRZDyohG589stqCA$ > .
+@prefix xsd: <https://urldefense.com/v3/__http://www.w3.org/2001/XMLSchema*__;Iw!!ASp95G87aa5DoyK5mB3l!9K-y0uH9ztTrcKOkwq1kFEHHeXWOyBn3VGnZ4CZ5L23FB-jLzbSApK4GjGMdI-fFBXNkovt3zLgRZDyohG4CgNN1vg$ > .
+@prefix prov: <https://urldefense.com/v3/__http://www.w3.org/ns/prov*__;Iw!!ASp95G87aa5DoyK5mB3l!9K-y0uH9ztTrcKOkwq1kFEHHeXWOyBn3VGnZ4CZ5L23FB-jLzbSApK4GjGMdI-fFBXNkovt3zLgRZDyohG7J6oNzrA$ > .
+@prefix dc: <https://urldefense.com/v3/__http://purl.org/dc/elements/1.1/__;!!ASp95G87aa5DoyK5mB3l!9K-y0uH9ztTrcKOkwq1kFEHHeXWOyBn3VGnZ4CZ5L23FB-jLzbSApK4GjGMdI-fFBXNkovt3zLgRZDyohG6aHU6zoQ$ > .
+@prefix pa: <https://urldefense.com/v3/__http://example.org/prompt-analysis*__;Iw!!ASp95G87aa5DoyK5mB3l!9K-y0uH9ztTrcKOkwq1kFEHHeXWOyBn3VGnZ4CZ5L23FB-jLzbSApK4GjGMdI-fFBXNkovt3zLgRZDyohG7LHU53EA$ > .
+@prefix aika: <https://urldefense.com/v3/__http://example.org/aika*__;Iw!!ASp95G87aa5DoyK5mB3l!9K-y0uH9ztTrcKOkwq1kFEHHeXWOyBn3VGnZ4CZ5L23FB-jLzbSApK4GjGMdI-fFBXNkovt3zLgRZDyohG5H33-vfA$ > .
+@prefix mirror: <https://urldefense.com/v3/__http://example.org/mirror*__;Iw!!ASp95G87aa5DoyK5mB3l!9K-y0uH9ztTrcKOkwq1kFEHHeXWOyBn3VGnZ4CZ5L23FB-jLzbSApK4GjGMdI-fFBXNkovt3zLgRZDyohG6vfzeYYA$ > .
+
+Following strict ontology compliance, generate prompt analysis using @prefix declarations (rdf, rdfs, owl, xsd, prov, finsight, coda). Output must implement all CODA classes (PromptAnalysis, PromptData, AnalysisResult, workflowStep, FinSightIntegration) with proper rdfs:subClassOf hierarchies. Include PROV-O activity tracking (prov:Activity, prov:Entity) and temporal context. Verify all properties (hasQualityScore, processesData, producesResult, hasAnalysisConfidence, hasProcessingMetrics) while maintaining coda:FinSightIntegration connection state. All outputs must follow defined property relationships using rdf:type and include evaluation metrics with proper content understanding framework for validation rules and inference patterns.
+
+# Ontology Definition and Metadata
+pa:PromptAnalysisOntology rdf:type owl:Ontology ;
+    dc:title "CODA Prompt Analysis Ontology"@en ;
+    dc:description "Framework for comprehensive prompt analysis and enhancement"@en ;
+    dc:creator "FinSight Intelligence Team" ;
+    dc:date "2025-02-06"^^xsd:date ;
+    dc:language "en" ;
+    owl:versionInfo "4.0.0" ;
+    prov:wasGeneratedBy [
+        a prov:Activity ;
+        prov:startedAtTime "2025-02-06T00:00:00Z"^^xsd:dateTime ;
+        prov:wasAssociatedWith [
+            a prov:Organization ;
+            rdfs:label "FinSight Intelligence Team"@en
+        ]
+    ] .
+
+# Core Analysis Framework
+pa:AnalysisComponent 
+    rdf:type owl:Class ;
+    rdfs:subClassOf prov:Activity ;
+    rdfs:label "Analysis Component"@en ;
+    rdfs:comment "Base class for analysis components"@en ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty prov:wasInformedBy ;
+        owl:someValuesFrom pa:AnalysisWorkflow
+    ] .
+
+pa:WorkflowStep 
+    rdf:type owl:Class ;
+    rdfs:subClassOf pa:AnalysisComponent ;
+    rdfs:label "Workflow Step"@en ;
+    rdfs:comment "A discrete step in the prompt analysis workflow"@en ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty prov:used ;
+        owl:someValuesFrom pa:PromptData
+    ] .
+
+# Data Model
+pa:PromptData 
+    rdf:type owl:Class ;
+    rdfs:subClassOf prov:Entity ;
+    rdfs:label "Prompt Data"@en ;
+    rdfs:comment "Base class for all prompt-related data"@en .
+
+pa:AnalysisResult 
+    rdf:type owl:Class ;
+    rdfs:subClassOf prov:Entity ;
+    rdfs:label "Analysis Result"@en ;
+    rdfs:comment "Output from analysis processes"@en ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty prov:wasGeneratedBy ;
+        owl:someValuesFrom pa:WorkflowStep
+    ] .
+
+# Process Properties
+pa:processesData 
+    rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf prov:used ;
+    rdfs:domain pa:WorkflowStep ;
+    rdfs:range pa:PromptData ;
+    rdfs:label "Processes Data"@en .
+
+pa:producesResult 
+    rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf prov:generated ;
+    rdfs:domain pa:WorkflowStep ;
+    rdfs:range pa:AnalysisResult ;
+    rdfs:label "Produces Result"@en .
+
+# Integration Framework
+pa:IntegrationPoint 
+    rdf:type owl:Class ;
+    rdfs:subClassOf prov:Activity ;
+    rdfs:label "Integration Point"@en ;
+    rdfs:comment "Connection point with other analysis systems"@en .
+
+pa:connectsWithAIKA 
+    rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf prov:wasInformedBy ;
+    owl:inverseOf aika:connectsWithCODA ;
+    rdfs:domain pa:IntegrationPoint ;
+    rdfs:range aika:PromptAnalysis ;
+    rdfs:label "Connects with AIKA"@en .
+
+pa:connectsWithMirror 
+    rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf prov:wasInformedBy ;
+    owl:inverseOf mirror:connectsWithCODA ;
+    rdfs:domain pa:IntegrationPoint ;
+    rdfs:range mirror:MetacognitiveAnalysis ;
+    rdfs:label "Connects with Mirror"@en .
+
+# Quality Framework
+pa:QualityMetric 
+    rdf:type owl:Class ;
+    rdfs:subClassOf prov:Entity ;
+    rdfs:label "Quality Metric"@en ;
+    rdfs:comment "Metric for assessing analysis quality"@en .
+
+pa:hasQualityScore 
+    rdf:type owl:DatatypeProperty ;
+    rdf:type owl:FunctionalProperty ;
+    rdfs:subPropertyOf prov:value ;
+    rdfs:domain pa:QualityMetric ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "Quality Score"@en .
+
+# Concept Framework
+pa:Concept 
+    rdf:type owl:Class ;
+    rdfs:subClassOf prov:Entity ;
+    rdfs:label "Concept"@en ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty pa:hasConfidence ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger
+    ] .
+
+pa:hasConfidence 
+    rdf:type owl:DatatypeProperty ;
+    rdf:type owl:FunctionalProperty ;
+    rdfs:domain pa:Concept ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "Confidence Score"@en .
+
+# Temporal Framework
+pa:TemporalContext 
+    rdf:type owl:Class ;
+    rdfs:subClassOf prov:InstantaneousEvent ;
+    rdfs:label "Temporal Context"@en ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty prov:startedAtTime ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger
+    ] .
+
+# Validation Framework
+pa:ValidationRule 
+    rdf:type owl:Class ;
+    rdfs:subClassOf prov:Entity ;
+    rdfs:label "Validation Rule"@en ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty prov:wasGeneratedBy ;
+        owl:someValuesFrom pa:AnalysisResult
+    ] .

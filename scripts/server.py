@@ -17,6 +17,7 @@ from destination_srv import get_destination_service_credentials, generate_token,
 from xsuaa_srv import get_xsuaa_credentials, verify_jwt_token, require_auth
 from fastapi import HTTPException  # Ensure HTTPException is imported for error handling
 from flask_wtf.csrf import CSRFProtect
+from csrf_srv import csrf_bp, generate_csrf_token, validate_csrf_token
 
 # CSRF functionality has been disabled. The following lines are commented out.
 # from csrf_srv import fetch_csrf_token_endpoint, validate_csrf_token
@@ -25,15 +26,20 @@ from flask_wtf.csrf import CSRFProtect
 app = Flask(__name__)
 CORS(app)
 
+# Register the CSRF Blueprint
+app.register_blueprint(csrf_bp)
+
 # Initialize CSRF protection
 csrf = CSRFProtect()
 csrf.init_app(app)
 
-# Disable CSRF for specific routes
 @app.before_request
-def disable_csrf():
-    if request.endpoint in ['api.upload_file', 'api.generate_embeddings']:
-        csrf._disable_on_request()
+def apply_csrf_protection():
+    """Automatically generate CSRF token and validate for protected endpoints."""
+    generate_csrf_token()  # Ensure a CSRF token is generated
+    if request.endpoint in ['api.generate_embeddings', 'api.chat', 'api.upload']:
+        if not validate_csrf_token():
+            return jsonify({"error": "Invalid CSRF token"}), 403
 
 # Load environment variables
 load_dotenv()
@@ -424,11 +430,6 @@ def generate_embeddings():
     except Exception as e:
         logger.error(f"Error in embedding generation process: {e}", exc_info=True)
         return jsonify({"error": "Failed to generate embeddings", "details": str(e)}), 500
-
-@app.before_request
-def disable_csrf():
-    if request.endpoint in ['api.upload_file', 'api.generate_embeddings']:
-        csrf._disable_on_request()
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))

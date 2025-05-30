@@ -343,13 +343,9 @@ def generate_embeddings():
             images_dir=images_dir,
             image_extensions=IMAGE_EXTENSIONS
         )
-        if not isinstance(downloaded_files, list):
-            logger.error("Expected a list of file paths, but got a different type")
-            return jsonify({"error": "Failed to download files"}), 500
-        if not downloaded_files:
-            logger.warning("No files to process for embeddings")
-            return jsonify({"message": "No files to process"}), 200
-
+        if not downloaded_files or not isinstance(downloaded_files, list):
+            logger.error("Expected a list of file paths, but got a different type or empty list")
+            return jsonify({"error": "Failed to download files or no files to process"}), 500
         logger.info(f"Downloaded {len(downloaded_files)} files: {downloaded_files}")
 
         # Step 2: Process and store embeddings

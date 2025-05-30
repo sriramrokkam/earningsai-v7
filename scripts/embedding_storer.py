@@ -140,8 +140,12 @@ def store_embeddings(vector_store, texts, embeddings, metadatas):
     #     return meta
 
     # New flat structure logic
-    def validate_metadata_tuple(meta_tuple):
-        source_file, content_hash, page = meta_tuple
+    def validate_metadata(meta):
+        """Validate and clean metadata dictionary."""
+        source_file = meta.get("source_file", "unknown")
+        content_hash = meta.get("content_hash", "unknown")
+        page = meta.get("page", 0)
+
         if not isinstance(source_file, str):
             logger.error(f"source_file is not a string, converting: {source_file} (type: {type(source_file)})")
             source_file = str(source_file)
@@ -154,7 +158,8 @@ def store_embeddings(vector_store, texts, embeddings, metadatas):
             except Exception:
                 logger.error(f"page is not an integer, defaulting to 0: {page} (type: {type(page)})")
                 page = 0
-        return (source_file, content_hash, page)
+
+        return {"source_file": source_file, "content_hash": content_hash, "page": page}
 
     filtered_metadatas = []
     filtered_texts = []
@@ -162,8 +167,7 @@ def store_embeddings(vector_store, texts, embeddings, metadatas):
     for i, meta in enumerate(metadatas):
         try:
             logger.debug(f"Processing metadata at index {i}: {meta}")
-            # Assuming meta is now a tuple (source_file, content_hash, page)
-            clean_meta = validate_metadata_tuple(meta)
+            clean_meta = validate_metadata(meta)
             filtered_metadatas.append(clean_meta)
             filtered_texts.append(texts[i])
             filtered_embeddings.append(embeddings[i])

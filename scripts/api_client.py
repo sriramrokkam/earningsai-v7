@@ -51,6 +51,10 @@ AUTH_URL = CAP_CREDENTIALS['cap_auth_url']
 CLIENT_ID = CAP_CREDENTIALS['cap_clientid']
 CLIENT_SECRET = CAP_CREDENTIALS['cap_clientsecret']
 
+logger.info("CLIENT_ID", CLIENT_ID);
+logger.info("AUTH_URL", AUTH_URL);
+
+
 # **** End of Code ***#
 
 # EMBEDDING_API_BASE_URL = "https://standard-chartered-bank-core-foundational-12982zqn-gena4b53cb41.cfapps.ap11.hana.ondemand.com/odata/v4/earning-upload-srv/EmbeddingFiles"
@@ -82,6 +86,7 @@ def get_auth_token() -> Optional[str]:
             return None
         
         token = r.json().get("access_token")
+        logger.info("Token Generated for Status Update", token)
         if not token:
             logger.error("No access token received")
             return None
@@ -147,7 +152,7 @@ def get_file_mappings() -> Dict[str, str]:
             return {}
         
         headers = {"Authorization": f"Bearer {token}"}
-        file_list_url = f"{EMBEDDING_API_BASE_URL}?$filter=status eq 'Submitted'"
+        file_list_url = f"{EMBEDDING_API_BASE_URL}?$filter=status eq 'Approved'"
         
         logger.info(f"Fetching file list from {file_list_url}")
         response = requests.get(file_list_url, headers=headers)

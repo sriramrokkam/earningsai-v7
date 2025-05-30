@@ -280,6 +280,8 @@ def process_and_store_embeddings(directory_path, force_overwrite_files=None, mod
     if not os.path.exists(directory_path):
         logger.error(f"Directory {directory_path} does not exist")
         return
+    logger.debug(f"Directory path received: {directory_path}")
+    logger.debug(f"Files in directory: {os.listdir(directory_path) if os.path.exists(directory_path) else 'Directory does not exist'}")
     existing_file_info = get_existing_file_info_from_db()
     # Separate PDF and Excel files
     pdf_files_info = {}

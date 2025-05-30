@@ -252,6 +252,7 @@ def download_embedding_files(documents_dir: str, images_dir: str, image_extensio
             return []
         
         logger.info(f"All Submitted files processed: {successful_downloads}/{total_files} downloaded successfully")
+        logger.debug(f"Returning downloaded file paths: {downloaded_file_paths}")
         return downloaded_file_paths
     
     except Exception as e:

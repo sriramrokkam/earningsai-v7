@@ -17,10 +17,14 @@ from destination_srv import get_destination_service_credentials, generate_token,
 from xsuaa_srv import get_xsuaa_credentials, verify_jwt_token, require_auth
 from fastapi import HTTPException  # Ensure HTTPException is imported for error handling
 from csrf_srv import fetch_csrf_token_endpoint, validate_csrf_token  # CSRF - Import CSRF functions
+from csrf_srv import csrf_bp
 
 # Initialize Flask app
 app = Flask(__name__)
 CORS(app)
+
+# Register the CSRF Blueprint
+app.register_blueprint(csrf_bp)
 
 # Load environment variables
 load_dotenv()

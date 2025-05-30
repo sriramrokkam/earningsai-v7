@@ -1,37 +1,41 @@
- 2025-05-30T03:09:46.19+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46 - earnings_analysis - ERROR - embedding_storer.py:171 - Skipping metadata at index 255 due to validation error: too many values to unpack (expected 3). Metadata: {'source_file': 'BCS_Transcripts_1Q25.pdf', 'page': 19, 'type': 'table', 'extractor': 'camelot', 'content_hash': 'd4abbdc9248d67a15c745709118daf89'}
-   2025-05-30T03:09:46.19+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,199 - ERROR - Skipping metadata at index 255 due to validation error: too many values to unpack (expected 3). Metadata: {'source_file': 'BCS_Transcripts_1Q25.pdf', 'page': 19, 'type': 'table', 'extractor': 'camelot', 'content_hash': 'd4abbdc9248d67a15c745709118daf89'}
-   2025-05-30T03:09:46.19+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46 - earnings_analysis - ERROR - embedding_storer.py:171 - Skipping metadata at index 256 due to validation error: too many values to unpack (expected 3). Metadata: {'source_file': 'BCS_Transcripts_1Q25.pdf', 'page': 19, 'type': 'table', 'extractor': 'camelot', 'content_hash': 'd4abbdc9248d67a15c745709118daf89'}
-   2025-05-30T03:09:46.19+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,199 - ERROR - Skipping metadata at index 256 due to validation error: too many values to unpack (expected 3). Metadata: {'source_file': 'BCS_Transcripts_1Q25.pdf', 'page': 19, 'type': 'table', 'extractor': 'camelot', 'content_hash': 'd4abbdc9248d67a15c745709118daf89'}
-   2025-05-30T03:09:46.19+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46 - earnings_analysis - WARNING - embedding_storer.py:174 - No valid embeddings to store after validation. Skipping DB insert.
-   2025-05-30T03:09:46.19+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,199 - WARNING - No valid embeddings to store after validation. Skipping DB insert.
-   2025-05-30T03:09:46.19+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46 - earnings_analysis - INFO - embedding_storer.py:486 - Starting duplicate removal process
-   2025-05-30T03:09:46.19+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,199 - INFO - Starting duplicate removal process
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46 - earnings_analysis - INFO - embedding_storer.py:220 - Removing duplicate entries from vector store table: GENAI_EARNINGS_Q125_EMBEDDED_TRANSCRIPTS
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,199 - INFO - Removing duplicate entries from vector store table: GENAI_EARNINGS_Q125_EMBEDDED_TRANSCRIPTS
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46 - earnings_analysis - INFO - embedding_storer.py:238 - Retrieved 0 total records from GENAI_EARNINGS_Q125_EMBEDDED_TRANSCRIPTS
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,203 - INFO - Retrieved 0 total records from GENAI_EARNINGS_Q125_EMBEDDED_TRANSCRIPTS
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46 - earnings_analysis - INFO - embedding_storer.py:240 - No records to deduplicate in GENAI_EARNINGS_Q125_EMBEDDED_TRANSCRIPTS
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,203 - INFO - No records to deduplicate in GENAI_EARNINGS_Q125_EMBEDDED_TRANSCRIPTS
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46 - earnings_analysis - INFO - embedding_storer.py:220 - Removing duplicate entries from vector store table: GENAI_EARNINGS_Q125_EMBEDDED_NON_TRANSCRIPTS
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,204 - INFO - Removing duplicate entries from vector store table: GENAI_EARNINGS_Q125_EMBEDDED_NON_TRANSCRIPTS
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46 - earnings_analysis - INFO - embedding_storer.py:238 - Retrieved 0 total records from GENAI_EARNINGS_Q125_EMBEDDED_NON_TRANSCRIPTS
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,206 - INFO - Retrieved 0 total records from GENAI_EARNINGS_Q125_EMBEDDED_NON_TRANSCRIPTS
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46 - earnings_analysis - INFO - embedding_storer.py:240 - No records to deduplicate in GENAI_EARNINGS_Q125_EMBEDDED_NON_TRANSCRIPTS
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,206 - INFO - No records to deduplicate in GENAI_EARNINGS_Q125_EMBEDDED_NON_TRANSCRIPTS
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46 - earnings_analysis - INFO - embedding_storer.py:220 - Removing duplicate entries from vector store table: GENAI_EARNINGS_Q125_EMBEDDED_EXCEL_NON_TRANSCRIPTS
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,206 - INFO - Removing duplicate entries from vector store table: GENAI_EARNINGS_Q125_EMBEDDED_EXCEL_NON_TRANSCRIPTS
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46 - earnings_analysis - INFO - embedding_storer.py:238 - Retrieved 0 total records from GENAI_EARNINGS_Q125_EMBEDDED_EXCEL_NON_TRANSCRIPTS
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,209 - INFO - Retrieved 0 total records from GENAI_EARNINGS_Q125_EMBEDDED_EXCEL_NON_TRANSCRIPTS
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46 - earnings_analysis - INFO - embedding_storer.py:240 - No records to deduplicate in GENAI_EARNINGS_Q125_EMBEDDED_EXCEL_NON_TRANSCRIPTS
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,209 - INFO - No records to deduplicate in GENAI_EARNINGS_Q125_EMBEDDED_EXCEL_NON_TRANSCRIPTS
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46 - earnings_analysis - INFO - embedding_storer.py:491 - Total duplicates removed: 0
-   2025-05-30T03:09:46.20+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,209 - INFO - Total duplicates removed: 0
-   2025-05-30T03:09:46.21+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,218 - INFO - Successfully processed and stored embeddings for file: /home/vcap/app/Documents/BCS_Transcripts_1Q25.pdf
-   2025-05-30T03:09:46.21+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,218 - INFO - Updating file statuses to 'Completed'
-   2025-05-30T03:09:46.21+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,219 - INFO - Requesting OAuth token
-   2025-05-30T03:09:46.24+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,246 - INFO - OAuth token acquired
-   2025-05-30T03:09:46.24+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,246 - INFO - Fetching file list from https://standard-chartered-bank-core-foundational-12982zqn-gena4b53cb41.cfapps.ap11.hana.ondemand.com/odata/v4/earning-upload-srv/EmbeddingFiles?$filter=status eq 'Approved'
-   2025-05-30T03:09:46.27+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,275 - INFO - Found 1 Submitted files
-   2025-05-30T03:09:46.27+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,275 - INFO - Found 0 files in /home/vcap/app/Documents to update status
-   2025-05-30T03:09:46.27+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,275 - INFO - Found 0 files in /home/vcap/app/Images to update status
-   2025-05-30T03:09:46.27+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:09:46,276 - INFO - File statuses updated successfully
+
+   2025-05-30T03:22:36.19+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:22:36,192 - WARNING - No documents found in the Excel non-transcript vector store!
+   2025-05-30T03:22:36.19+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:22:36,193 - INFO - All vector stores loaded successfully
+   2025-05-30T03:23:21.39+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,394 - INFO - HTTP Request: GET https://core-foundational-12982zqn.authentication.ap11.hana.ondemand.com/token_keys?zid=a4858a1d-5361-433e-953b-3b1af8d72b3c "HTTP/1.1 200 OK"
+   2025-05-30T03:23:21.39+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,397 - INFO - Token successfully verified and scope present.
+   2025-05-30T03:23:21.39+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,397 - INFO - Starting embedding generation process
+   2025-05-30T03:23:21.39+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,397 - INFO - Downloading files for embedding generation
+   2025-05-30T03:23:21.39+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,397 - INFO - Requesting OAuth token
+   2025-05-30T03:23:21.49+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,495 - INFO - OAuth token acquired
+   2025-05-30T03:23:21.49+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,495 - INFO - Fetching file list from https://standard-chartered-bank-core-foundational-12982zqn-gena4b53cb41.cfapps.ap11.hana.ondemand.com/odata/v4/earning-upload-srv/EmbeddingFiles?$filter=status eq 'Approved'
+   2025-05-30T03:23:21.70+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,702 - INFO - Found 1 Submitted files
+   2025-05-30T03:23:21.70+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,702 - INFO - Downloading file: BCS_Transcripts_1Q25.pdf from https://standard-chartered-bank-core-foundational-12982zqn-gena4b53cb41.cfapps.ap11.hana.ondemand.com/odata/v4/earning-upload-srv/EmbeddingFiles('fa04bb5ef0c82042aa380925c96fd348beb3259ab0e1e8fd862a9f684022545b')/content
+   2025-05-30T03:23:21.77+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,776 - INFO - Downloaded: /home/vcap/app/Documents/BCS_Transcripts_1Q25.pdf
+   2025-05-30T03:23:21.77+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,776 - INFO - All Submitted files processed: 1/1 downloaded successfully
+   2025-05-30T03:23:21.77+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,777 - INFO - Type of downloaded_files: <class 'list'>, Value: ['/home/vcap/app/Documents/BCS_Transcripts_1Q25.pdf']
+   2025-05-30T03:23:21.77+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,777 - INFO - Downloaded 1 files: ['/home/vcap/app/Documents/BCS_Transcripts_1Q25.pdf']
+   2025-05-30T03:23:21.77+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,777 - INFO - Processing file: /home/vcap/app/Documents/BCS_Transcripts_1Q25.pdf
+   2025-05-30T03:23:21.77+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21 - earnings_analysis - INFO - embedding_storer.py:281 - Processing files from /home/vcap/app/Documents with model: text-embedding-3-large
+   2025-05-30T03:23:21.77+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,777 - INFO - Processing files from /home/vcap/app/Documents with model: text-embedding-3-large
+   2025-05-30T03:23:21.77+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21 - earnings_analysis - INFO - embedding_storer.py:67 - Fetching existing file info from all tables
+   2025-05-30T03:23:21.77+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,777 - INFO - Fetching existing file info from all tables
+   2025-05-30T03:23:21.86+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21 - earnings_analysis - INFO - embedding_storer.py:94 - Found 1 unique files across all tables
+   2025-05-30T03:23:21.86+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,860 - INFO - Found 1 unique files across all tables
+   2025-05-30T03:23:21.86+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21 - earnings_analysis - INFO - embedding_storer.py:323 - Found 1 PDF files, 0 need processing
+   2025-05-30T03:23:21.86+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,861 - INFO - Found 1 PDF files, 0 need processing
+   2025-05-30T03:23:21.86+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21 - earnings_analysis - INFO - embedding_storer.py:324 - Found 0 Excel files, 0 need processing
+   2025-05-30T03:23:21.86+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,861 - INFO - Found 0 Excel files, 0 need processing
+   2025-05-30T03:23:21.86+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21 - earnings_analysis - INFO - embedding_storer.py:326 - No new or changed files to process
+   2025-05-30T03:23:21.86+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,862 - INFO - No new or changed files to process
+   2025-05-30T03:23:21.86+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,862 - INFO - Successfully processed and stored embeddings for file: /home/vcap/app/Documents/BCS_Transcripts_1Q25.pdf
+   2025-05-30T03:23:21.86+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,862 - INFO - Updating file statuses to 'Completed'
+   2025-05-30T03:23:21.86+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,862 - INFO - Requesting OAuth token
+   2025-05-30T03:23:21.97+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,971 - INFO - OAuth token acquired
+   2025-05-30T03:23:21.97+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:21,972 - INFO - Fetching file list from https://standard-chartered-bank-core-foundational-12982zqn-gena4b53cb41.cfapps.ap11.hana.ondemand.com/odata/v4/earning-upload-srv/EmbeddingFiles?$filter=status eq 'Approved'
+   2025-05-30T03:23:22.00+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:22,002 - INFO - Found 1 Submitted files
+   2025-05-30T03:23:22.00+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:22,003 - INFO - Found 0 files in /home/vcap/app/Documents to update status
+   2025-05-30T03:23:22.00+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:22,003 - INFO - Found 0 files in /home/vcap/app/Images to update status
+   2025-05-30T03:23:22.00+0000 [APP/PROC/WEB/0] ERR 2025-05-30 03:23:22,003 - INFO - File statuses updated successfully
+   2025-05-30T03:23:22.00+0000 [APP/PROC/WEB/0] OUT 10.147.244.42 - - [30/May/2025:03:23:22 +0000] "POST /api/generate-embeddings HTTP/1.1" 200 48 "-" "PostmanRuntime/7.44.0"
+   2025-05-30T03:23:22.00+0000 [RTR/3] OUT earningsai-asst-srv6.cfapps.ap11.hana.ondemand.com - [2025-05-30T03:23:21.331167371Z] "POST /api/generate-embeddings HTTP/1.1" 200 0 48 "-" "PostmanRuntime/7.44.0" "10.0.136.1:59610" "10.0.201.21:61061" x_forwarded_for:"54.86.50.139, 10.0.136.1" x_forwarded_proto:"https" vcap_request_id:"536d2512-d75c-40ec-6988-063dbd99b0fd" response_time:0.675334 gorouter_time:0.000054 app_id:"cf3674e4-5310-4b27-b141-32d6ae3724ab" app_index:"0" instance_id:"c6f21afe-759a-4430-4d7b-4678" failed_attempts:0 failed_attempts_time:"-" dns_time:0.000000 dial_time:0.000962 tls_time:0.005934 backend_time:0.675279 local_address:"10.0.129.9:60258" x_cf_routererror:"-" x_correlationid:"-" tenantid:"-" sap_passport:"-" x_scp_request_id:"5c78a499-f93c-4b60-9c4a-aa7439265f75-683924A9-806D76" x_cf_app_instance:"-" x_forwarded_host:"-" x_custom_host:"-" x_ssl_client:"-" x_ssl_client_session_id:"-" x_ssl_client_verify:"-" x_ssl_client_subject_dn:"-" x_ssl_client_subject_cn:"-" x_ssl_client_issuer_dn:"-" x_ssl_client_notbefore:"-" x_ssl_client_notafter:"-" x_cf_forwarded_url:"-" traceparent:"-" true_client_ip:"-" x_cf_true_client_ip:"54.86.50.139" x_request_id:"-" x_b3_traceid:"536d2512d75c40ec6988063dbd99b0fd" x_b3_spanid:"6988063dbd99b0fd" x_b3_parentspanid:"-" b3:"536d2512d75c40ec6988063dbd99b0fd-6988063dbd99b0fd"
+user: EarningsAI_V7_ST $ 

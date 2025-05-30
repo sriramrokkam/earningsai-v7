@@ -375,7 +375,7 @@ def generate_embeddings():
             update_completed_files(
                 documents_dir=documents_dir,
                 images_dir=images_dir,
-                allowed_extensions=IMAGE_EXTENSIONS
+                allowed_extensions=ALLOWED_EXTENSIONS
             )
             logger.info("File statuses updated successfully")
         else:

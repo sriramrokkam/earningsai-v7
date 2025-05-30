@@ -380,22 +380,7 @@ def generate_embeddings():
         logger.error(f"Error in embedding generation process: {e}", exc_info=True)
         return jsonify({"error": "Failed to generate embeddings", "details": str(e)}), 500
 
-    # Commenting out the old logic for reference
-    # try:
-    #     files = request.json.get('files', [])
-    #     if not files:
-    #         return jsonify({"error": "No files provided"}), 400
 
-    #     logger.info(f"Files received for embedding generation: {files}")
-    #     for file in files:
-    #         logger.info(f"Processing file: {file}")
-    #         # Old logic for processing files
-    #         # process_and_store_embeddings(file)
-
-    #     return jsonify({"message": "Embeddings generated successfully"}), 200
-    # except Exception as e:
-    #     logger.error(f"Error generating embeddings: {e}", exc_info=True)
-    #     return jsonify({"error": "Failed to generate embeddings", "details": str(e)}), 500
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
     logger.info(f"Starting Flask app on port {port}")

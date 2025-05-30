@@ -184,6 +184,7 @@ def download_embedding_files(documents_dir: str, images_dir: str, image_extensio
     Returns:
         list: List of downloaded file paths
     """
+    downloaded_file_paths = []  # List to store downloaded file paths
     try:
         # Get authentication token
         token = get_auth_token()
@@ -211,7 +212,6 @@ def download_embedding_files(documents_dir: str, images_dir: str, image_extensio
         # Track successful downloads
         successful_downloads = 0
         total_files = len(files)
-        downloaded_file_paths = []
         
         # Download each file individually
         for file in files:
@@ -253,7 +253,7 @@ def download_embedding_files(documents_dir: str, images_dir: str, image_extensio
         
         logger.info(f"All Submitted files processed: {successful_downloads}/{total_files} downloaded successfully")
         logger.debug(f"Returning downloaded file paths: {downloaded_file_paths}")
-        return downloaded_file_paths
+        return downloaded_file_paths  # Return the list of file paths
     
     except Exception as e:
         logger.error(f"Error in download_embedding_files: {str(e)}")

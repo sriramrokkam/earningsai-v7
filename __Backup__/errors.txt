@@ -1,20 +1,27 @@
-"/home/vcap/app/server.py", line 19, in <module>
-   2025-05-30T14:28:18.32+0000 [APP/PROC/WEB/0] ERR from csrf_srv import fetch_csrf_token_endpoint, validate_csrf_token  # CSRF - Import CSRF functions
-   2025-05-30T14:28:18.32+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/app/csrf_srv.py", line 3, in <module>
-   2025-05-30T14:28:18.32+0000 [APP/PROC/WEB/0] ERR from server import app  # Use the main Flask app from server.py
-   2025-05-30T14:28:18.32+0000 [APP/PROC/WEB/0] ERR ImportError: cannot import name 'app' from partially initialized module 'server' (most likely due to a circular import) (/home/vcap/app/server.py)
-   2025-05-30T14:28:18.32+0000 [APP/PROC/WEB/0] ERR [2025-05-30 14:28:18 +0000] [226] [INFO] Worker exiting (pid: 226)
-   2025-05-30T14:28:18.32+0000 [APP/PROC/WEB/0] ERR 2025-05-30 14:28:18 - earnings_analysis - INFO - db_connection.py:148 - Closing all database connections in the pool
-   2025-05-30T14:28:18.32+0000 [APP/PROC/WEB/0] ERR 2025-05-30 14:28:18,322 - INFO - Closing all database connections in the pool
-   2025-05-30T14:28:19.36+0000 [APP/PROC/WEB/0] ERR [2025-05-30 14:28:19 +0000] [8] [ERROR] Worker (pid:226) exited with code 3
-   2025-05-30T14:28:19.37+0000 [APP/PROC/WEB/0] ERR [2025-05-30 14:28:19 +0000] [8] [ERROR] Shutting down: Master
-   2025-05-30T14:28:19.37+0000 [APP/PROC/WEB/0] ERR [2025-05-30 14:28:19 +0000] [8] [ERROR] Reason: Worker failed to boot.
-   2025-05-30T14:28:19.39+0000 [APP/PROC/WEB/0] OUT Exit status 3
-   2025-05-30T14:28:19.39+0000 [CELL/SSHD/0] OUT Exit status 0
-   2025-05-30T14:28:25.04+0000 [CELL/0] OUT Cell a04640fc-9ada-47a6-9da5-f2431201f2e2 stopping instance 333f10e9-ed3c-48f2-6509-51ed
-   2025-05-30T14:28:25.04+0000 [CELL/0] OUT Cell a04640fc-9ada-47a6-9da5-f2431201f2e2 destroying container for instance 333f10e9-ed3c-48f2-6509-51ed
-   2025-05-30T14:28:25.05+0000 [API/16] OUT Process has crashed with type: "web"
-   2025-05-30T14:28:25.07+0000 [API/16] OUT App instance exited with guid cf3674e4-5310-4b27-b141-32d6ae3724ab payload: {"instance"=>"333f10e9-ed3c-48f2-6509-51ed", "index"=>0, "cell_id"=>"a04640fc-9ada-47a6-9da5-f2431201f2e2", "reason"=>"CRASHED", "exit_description"=>"APP/PROC/WEB: Exited with status 3", "crash_count"=>3, "crash_timestamp"=>1748615305035573908, "version"=>"0997aa7b-d260-48f3-85aa-185db21f6157"}
-   2025-05-30T14:28:25.14+0000 [PROXY/0] OUT Exit status 137
-   2025-05-30T14:28:28.40+0000 [CELL/0] OUT Cell a04640fc-9ada-47a6-9da5-f2431201f2e2 successfully destroyed container for instance 333f10e9-ed3c-48f2-6509-51ed
+2025-05-30T16:26:43.44+0000 [APP/PROC/WEB/0] ERR RuntimeError: A secret key is required to use CSRF.
+   2025-05-30T16:26:43.44+0000 [APP/PROC/WEB/0] OUT 10.152.216.167 - - [30/May/2025:16:26:43 +0000] "POST /api/generate-embeddings HTTP/1.1" 500 265 "-" "PostmanRuntime/7.44.0"
+   2025-05-30T16:26:43.44+0000 [RTR/2] OUT earningsai-asst-srv6.cfapps.ap11.hana.ondemand.com - [2025-05-30T16:26:43.438747173Z] "POST /api/generate-embeddings HTTP/1.1" 500 0 265 "-" "PostmanRuntime/7.44.0" "10.0.136.1:13012" "10.0.201.28:61042" x_forwarded_for:"54.86.50.139, 10.0.136.1" x_forwarded_proto:"https" vcap_request_id:"47519c28-f096-4a57-4e85-d60560b802a5" response_time:0.009699 gorouter_time:0.000038 app_id:"cf3674e4-5310-4b27-b141-32d6ae3724ab" app_index:"0" instance_id:"e5273002-224f-4757-6f2e-eeda" failed_attempts:0 failed_attempts_time:"-" dns_time:0.000000 dial_time:0.001040 tls_time:0.005622 backend_time:0.009661 local_address:"10.0.129.8:50038" x_cf_routererror:"-" x_correlationid:"-" tenantid:"-" sap_passport:"-" x_scp_request_id:"5c78a499-f93c-4b60-9c4a-aa7439265f75-6839DC43-1241F93" x_cf_app_instance:"-" x_forwarded_host:"-" x_custom_host:"-" x_ssl_client:"-" x_ssl_client_session_id:"-" x_ssl_client_verify:"-" x_ssl_client_subject_dn:"-" x_ssl_client_subject_cn:"-" x_ssl_client_issuer_dn:"-" x_ssl_client_notbefore:"-" x_ssl_client_notafter:"-" x_cf_forwarded_url:"-" traceparent:"-" true_client_ip:"-" x_cf_true_client_ip:"54.86.50.139" x_request_id:"-" x_b3_traceid:"47519c28f0964a574e85d60560b802a5" x_b3_spanid:"4e85d60560b802a5" x_b3_parentspanid:"-" b3:"47519c28f0964a574e85d60560b802a5-4e85d60560b802a5"
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR 2025-05-30 16:26:51,387 - ERROR - Exception on /api/chat [POST]
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR Traceback (most recent call last):
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR response = self.full_dispatch_request()
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR rv = self.handle_user_exception(e)
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/flask_cors/extension.py", line 176, in wrapped_function
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR return cors_after_request(app.make_response(f(*args, **kwargs)))
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/flask/app.py", line 915, in full_dispatch_request
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR rv = self.preprocess_request()
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/flask/app.py", line 1291, in preprocess_request
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR rv = self.ensure_sync(before_func)()
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/flask_wtf/csrf.py", line 229, in csrf_protect
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR self.protect()
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/flask_wtf/csrf.py", line 261, in protect
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR validate_csrf(self._get_csrf_token())
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/flask_wtf/csrf.py", line 85, in validate_csrf
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR secret_key = _get_config(
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/flask_wtf/csrf.py", line 136, in _get_config
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR raise RuntimeError(message)
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] ERR RuntimeError: A secret key is required to use CSRF.
+   2025-05-30T16:26:51.38+0000 [APP/PROC/WEB/0] OUT 10.152.216.167 - - [30/May/2025:16:26:51 +0000] "POST /api/chat HTTP/1.1" 500 265 "-" "PostmanRuntime/7.44.0"
+   2025-05-30T16:26:51.38+0000 [RTR/2] OUT earningsai-asst-srv6.cfapps.ap11.hana.ondemand.com - [2025-05-30T16:26:51.378774368Z] "POST /api/chat HTTP/1.1" 500 58 265 "-" "PostmanRuntime/7.44.0" "10.0.136.1:55914" "10.0.201.28:61042" x_forwarded_for:"54.86.50.139, 10.0.136.1" x_forwarded_proto:"https" vcap_request_id:"df99ed5c-77f3-4dd1-6840-dce670e3cc4a" response_time:0.010657 gorouter_time:0.000032 app_id:"cf3674e4-5310-4b27-b141-32d6ae3724ab" app_index:"0" instance_id:"e5273002-224f-4757-6f2e-eeda" failed_attempts:0 failed_attempts_time:"-" dns_time:0.000000 dial_time:0.001182 tls_time:0.006055 backend_time:0.010624 local_address:"10.0.129.8:53592" x_cf_routererror:"-" x_correlationid:"-" tenantid:"-" sap_passport:"-" x_scp_request_id:"5c78a499-f93c-4b60-9c4a-aa7439265f75-6839DC43-1242498" x_cf_app_instance:"-" x_forwarded_host:"-" x_custom_host:"-" x_ssl_client:"-" x_ssl_client_session_id:"-" x_ssl_client_verify:"-" x_ssl_client_subject_dn:"-" x_ssl_client_subject_cn:"-" x_ssl_client_issuer_dn:"-" x_ssl_client_notbefore:"-" x_ssl_client_notafter:"-" x_cf_forwarded_url:"-" traceparent:"-" true_client_ip:"-" x_cf_true_client_ip:"54.86.50.139" x_request_id:"-" x_b3_traceid:"df99ed5c77f34dd16840dce670e3cc4a" x_b3_spanid:"6840dce670e3cc4a" x_b3_parentspanid:"-" b3:"df99ed5c77f34dd16840dce670e3cc4a-6840dce670e3cc4a"
 user: EarningsAI_V7_ST $ 

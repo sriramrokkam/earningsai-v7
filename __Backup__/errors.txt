@@ -1,5 +1,141 @@
-   2025-05-30T00:18:36.10+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:18:36,100 - INFO - Found 1 Submitted files
-   2025-05-30T00:18:36.10+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:18:36,101 - INFO - Downloading file: BCS_Transcripts_1Q25.pdf from https://standard-chartered-bank-core-foundational-12982zqn-gena4b53cb41.cfapps.ap11.hana.ondemand.com/odata/v4/earning-upload-srv/EmbeddingFiles('fa04bb5ef0c82042aa380925c96fd348beb3259ab0e1e8fd862a9f684022545b')/content
-   2025-05-30T00:18:36.16+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:18:36,161 - INFO - Downloaded: /home/vcap/app/Documents/BCS_Transcripts_1Q25.pdf
-   2025-05-30T00:18:36.16+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:18:36,162 - INFO - All Submitted files processed: 1/1 downloaded successfully
-   2025-05-30T00:18:36.16+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:18:36,162 - ERROR - Expected a list of file paths, but got a different type or empty list
+  2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR msg = msg % self.args
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR TypeError: not all arguments converted during string formatting
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR Call stack:
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/bin/gunicorn", line 8, in <module>
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR sys.exit(run())
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 66, in run
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR WSGIApplication("%(prog)s [OPTIONS] [APP_MODULE]", prog=prog).run()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/app/base.py", line 235, in run
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR super().run()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/app/base.py", line 71, in run
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR Arbiter(self).run()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/arbiter.py", line 201, in run
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR self.manage_workers()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/arbiter.py", line 570, in manage_workers
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR self.spawn_workers()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/arbiter.py", line 641, in spawn_workers
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR self.spawn_worker()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR worker.init_process()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/workers/base.py", line 135, in init_process
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR self.load_wsgi()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR self.wsgi = self.app.wsgi()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/app/base.py", line 66, in wsgi
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR self.callable = self.load()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR return self.load_wsgiapp()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR return util.import_app(self.app_uri)
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/util.py", line 370, in import_app
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR mod = importlib.import_module(module)
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/importlib/__init__.py", line 126, in import_module
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR return _bootstrap._gcd_import(name[level:], package, level)
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/app/server.py", line 189, in <module>
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR transcript_store, non_transcript_store, excel_non_transcript_store = load_vector_stores(AIC_CREDENTIALS=GV_AIC_CREDENTIALS)
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/app/db_connection.py", line 159, in load_vector_stores
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR logger.info('Embedding Model', EMBEDDING_MODEL)
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR Message: 'Embedding Model'
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR Arguments: ('text-embedding-3-large',)
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR --- Logging error ---
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR Traceback (most recent call last):
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/logging/__init__.py", line 1100, in emit
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR msg = self.format(record)
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/logging/__init__.py", line 943, in format
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR return fmt.format(record)
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/logging/__init__.py", line 678, in format
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR record.message = record.getMessage()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/logging/__init__.py", line 368, in getMessage
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR msg = msg % self.args
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR TypeError: not all arguments converted during string formatting
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR Call stack:
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/bin/gunicorn", line 8, in <module>
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR sys.exit(run())
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 66, in run
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR WSGIApplication("%(prog)s [OPTIONS] [APP_MODULE]", prog=prog).run()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/app/base.py", line 235, in run
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR super().run()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/app/base.py", line 71, in run
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR Arbiter(self).run()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/arbiter.py", line 201, in run
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR self.manage_workers()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/arbiter.py", line 570, in manage_workers
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR self.spawn_workers()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/arbiter.py", line 641, in spawn_workers
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR self.spawn_worker()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR worker.init_process()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/workers/base.py", line 135, in init_process
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR self.load_wsgi()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR self.wsgi = self.app.wsgi()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/app/base.py", line 66, in wsgi
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR self.callable = self.load()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR return self.load_wsgiapp()
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR return util.import_app(self.app_uri)
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/gunicorn/util.py", line 370, in import_app
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR mod = importlib.import_module(module)
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/importlib/__init__.py", line 126, in import_module
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR return _bootstrap._gcd_import(name[level:], package, level)
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/app/server.py", line 189, in <module>
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR transcript_store, non_transcript_store, excel_non_transcript_store = load_vector_stores(AIC_CREDENTIALS=GV_AIC_CREDENTIALS)
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/app/db_connection.py", line 159, in load_vector_stores
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR logger.info('Embedding Model', EMBEDDING_MODEL)
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR Message: 'Embedding Model'
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR Arguments: ('text-embedding-3-large',)
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59 - earnings_analysis - INFO - db_connection.py:160 - AIC Credentials
+   2025-05-30T01:12:59.10+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59,109 - INFO - AIC Credentials
+   2025-05-30T01:12:59.43+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59 - earnings_analysis - INFO - db_connection.py:173 - [Deployment(url='https://api.ai.prod-ap11.ap-southeast-1.aws.ml.hana.ondemand.com/v2/inference/deployments/dc9a1b42c1f5d3fe', config_id='257759e1-a04f-4ef1-9ca1-35afe1610b04', config_name='gpt-4o_autogenerated', deployment_id='dc9a1b42c1f5d3fe', model_name='gpt-4o', created_at=datetime.datetime(2025, 5, 27, 5, 56, 9, tzinfo=datetime.timezone.utc), additonal_parameters={}, custom_prediction_suffix=None), Deployment(url='https://api.ai.prod-ap11.ap-southeast-1.aws.ml.hana.ondemand.com/v2/inference/deployments/d07481757a2f3028', config_id='c880f6a8-1d06-44f0-ad1f-e5450bae45b3', config_name='text-embedding-3-large_autogenerated', deployment_id='d07481757a2f3028', model_name='text-embedding-3-large', created_at=datetime.datetime(2025, 2, 16, 5, 21, 49, tzinfo=datetime.timezone.utc), additonal_parameters={}, custom_prediction_suffix=None), Deployment(url='https://api.ai.prod-ap11.ap-southeast-1.aws.ml.hana.ondemand.com/v2/inference/deployments/d1b2f6e26d8b479d', config_id='3373eadf-d675-4990-aa7b-6dcf11fdd558', config_name='anthropic--claude-3.5-sonnet_autogenerated', deployment_id='d1b2f6e26d8b479d', model_name='anthropic--claude-3.5-sonnet', created_at=datetime.datetime(2025, 1, 22, 11, 11, 5, tzinfo=datetime.timezone.utc), additonal_parameters={}, custom_prediction_suffix=None)]
+   2025-05-30T01:12:59.43+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59,432 - INFO - [Deployment(url='https://api.ai.prod-ap11.ap-southeast-1.aws.ml.hana.ondemand.com/v2/inference/deployments/dc9a1b42c1f5d3fe', config_id='257759e1-a04f-4ef1-9ca1-35afe1610b04', config_name='gpt-4o_autogenerated', deployment_id='dc9a1b42c1f5d3fe', model_name='gpt-4o', created_at=datetime.datetime(2025, 5, 27, 5, 56, 9, tzinfo=datetime.timezone.utc), additonal_parameters={}, custom_prediction_suffix=None), Deployment(url='https://api.ai.prod-ap11.ap-southeast-1.aws.ml.hana.ondemand.com/v2/inference/deployments/d07481757a2f3028', config_id='c880f6a8-1d06-44f0-ad1f-e5450bae45b3', config_name='text-embedding-3-large_autogenerated', deployment_id='d07481757a2f3028', model_name='text-embedding-3-large', created_at=datetime.datetime(2025, 2, 16, 5, 21, 49, tzinfo=datetime.timezone.utc), additonal_parameters={}, custom_prediction_suffix=None), Deployment(url='https://api.ai.prod-ap11.ap-southeast-1.aws.ml.hana.ondemand.com/v2/inference/deployments/d1b2f6e26d8b479d', config_id='3373eadf-d675-4990-aa7b-6dcf11fdd558', config_name='anthropic--claude-3.5-sonnet_autogenerated', deployment_id='d1b2f6e26d8b479d', model_name='anthropic--claude-3.5-sonnet', created_at=datetime.datetime(2025, 1, 22, 11, 11, 5, tzinfo=datetime.timezone.utc), additonal_parameters={}, custom_prediction_suffix=None)]
+   2025-05-30T01:12:59.43+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59 - earnings_analysis - INFO - db_connection.py:176 - Embedding model initialized successfully
+   2025-05-30T01:12:59.43+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59,432 - INFO - Embedding model initialized successfully
+   2025-05-30T01:12:59.59+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59 - earnings_analysis - INFO - db_connection.py:112 - Schema set to GenAI_Earnings_Call_1
+   2025-05-30T01:12:59.59+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59,594 - INFO - Schema set to GenAI_Earnings_Call_1
+   2025-05-30T01:12:59.59+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59 - earnings_analysis - INFO - db_connection.py:113 - Database connection established successfully
+   2025-05-30T01:12:59.59+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59,594 - INFO - Database connection established successfully
+   2025-05-30T01:12:59.59+0000 [APP/PROC/WEB/0] ERR /home/vcap/app/db_connection.py:194: LangChainDeprecationWarning: This class is deprecated and will be removed in a future version. Please use HanaDB from the langchain_hana package instead. See https://github.com/SAP/langchain-integration-for-sap-hana-cloud for details.
+   2025-05-30T01:12:59.59+0000 [APP/PROC/WEB/0] ERR transcript_store = HanaDB(
+   2025-05-30T01:12:59.67+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59 - earnings_analysis - INFO - db_connection.py:218 - Vector stores initialized successfully
+   2025-05-30T01:12:59.67+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59,676 - INFO - Vector stores initialized successfully
+   2025-05-30T01:12:59.68+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59 - earnings_analysis - INFO - db_connection.py:245 - Transcript vector store loaded with 0 documents
+   2025-05-30T01:12:59.68+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59,679 - INFO - Transcript vector store loaded with 0 documents
+   2025-05-30T01:12:59.68+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59 - earnings_analysis - WARNING - db_connection.py:247 - No documents found in the transcript vector store!
+   2025-05-30T01:12:59.68+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59,680 - WARNING - No documents found in the transcript vector store!
+   2025-05-30T01:12:59.68+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59 - earnings_analysis - INFO - db_connection.py:251 - Non-transcript vector store (PDFs) loaded with 0 documents
+   2025-05-30T01:12:59.68+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59,682 - INFO - Non-transcript vector store (PDFs) loaded with 0 documents
+   2025-05-30T01:12:59.68+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59 - earnings_analysis - WARNING - db_connection.py:253 - No documents found in the non-transcript vector store (PDFs)!
+   2025-05-30T01:12:59.68+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59,682 - WARNING - No documents found in the non-transcript vector store (PDFs)!
+   2025-05-30T01:12:59.68+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59 - earnings_analysis - INFO - db_connection.py:257 - Excel non-transcript vector store loaded with 0 documents
+   2025-05-30T01:12:59.68+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59,685 - INFO - Excel non-transcript vector store loaded with 0 documents
+   2025-05-30T01:12:59.68+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59 - earnings_analysis - WARNING - db_connection.py:259 - No documents found in the Excel non-transcript vector store!
+   2025-05-30T01:12:59.68+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59,685 - WARNING - No documents found in the Excel non-transcript vector store!
+   2025-05-30T01:12:59.68+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:12:59,686 - INFO - All vector stores loaded successfully
+   2025-05-30T01:33:31.69+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:33:31,698 - INFO - HTTP Request: GET https://core-foundational-12982zqn.authentication.ap11.hana.ondemand.com/token_keys?zid=a4858a1d-5361-433e-953b-3b1af8d72b3c "HTTP/1.1 200 OK"
+   2025-05-30T01:33:31.70+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:33:31,700 - INFO - Token successfully verified and scope present.
+   2025-05-30T01:33:31.70+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:33:31,700 - INFO - Starting embedding generation process
+   2025-05-30T01:33:31.70+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:33:31,701 - INFO - Downloading files for embedding generation
+   2025-05-30T01:33:31.70+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:33:31,701 - INFO - Requesting OAuth token
+   2025-05-30T01:33:31.80+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:33:31,802 - INFO - OAuth token acquired
+   2025-05-30T01:33:31.80+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:33:31,802 - INFO - Fetching file list from https://standard-chartered-bank-core-foundational-12982zqn-gena4b53cb41.cfapps.ap11.hana.ondemand.com/odata/v4/earning-upload-srv/EmbeddingFiles?$filter=status eq 'Approved'
+   2025-05-30T01:33:32.04+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:33:32,043 - INFO - Found 1 Submitted files
+   2025-05-30T01:33:32.04+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:33:32,043 - INFO - Downloading file: BCS_Transcripts_1Q25.pdf from https://standard-chartered-bank-core-foundational-12982zqn-gena4b53cb41.cfapps.ap11.hana.ondemand.com/odata/v4/earning-upload-srv/EmbeddingFiles('fa04bb5ef0c82042aa380925c96fd348beb3259ab0e1e8fd862a9f684022545b')/content
+   2025-05-30T01:33:32.10+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:33:32,109 - INFO - Downloaded: /home/vcap/app/Documents/BCS_Transcripts_1Q25.pdf
+   2025-05-30T01:33:32.10+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:33:32,109 - INFO - All Submitted files processed: 1/1 downloaded successfully
+   2025-05-30T01:33:32.11+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:33:32,110 - INFO - Type of downloaded_files: <class 'tuple'>, Value: (True, 1)
+   2025-05-30T01:33:32.11+0000 [APP/PROC/WEB/0] ERR 2025-05-30 01:33:32,110 - ERROR - Expected a list of file paths, but got a different type.
+   2025-05-30T01:33:32.11+0000 [APP/PROC/WEB/0] OUT 10.156.31.62 - - [30/May/2025:01:33:32 +0000] "POST /api/generate-embeddings HTTP/1.1" 500 68 "-" "PostmanRuntime/7.44.0"
+   2025-05-30T01:33:32.11+0000 [RTR/0] OUT earningsai-asst-srv6.cfapps.ap11.hana.ondemand.com - [2025-05-30T01:33:31.630418543Z] "POST /api/generate-embeddings HTTP/1.1" 500 0 68 "-" "PostmanRuntime/7.44.0" "10.0.72.0:64840" "10.0.201.19:61037" x_forwarded_for:"54.86.50.139, 10.0.72.0" x_forwarded_proto:"https" vcap_request_id:"4d06b60d-5345-4770-57ae-0886a081097c" response_time:0.483036 gorouter_time:0.000055 app_id:"cf3674e4-5310-4b27-b141-32d6ae3724ab" app_index:"0" instance_id:"0dc8d409-cc2d-456e-611c-d26f" failed_attempts:0 failed_attempts_time:"-" dns_time:0.000000 dial_time:0.001187 tls_time:0.006406 backend_time:0.482982 local_address:"10.0.65.8:28310" x_cf_routererror:"-" x_correlationid:"-" tenantid:"-" sap_passport:"-" x_scp_request_id:"90fcb3a6-b84b-4e42-9db8-3ea744c5a2e8-68390AEB-78BFD2" x_cf_app_instance:"-" x_forwarded_host:"-" x_custom_host:"-" x_ssl_client:"-" x_ssl_client_session_id:"-" x_ssl_client_verify:"-" x_ssl_client_subject_dn:"-" x_ssl_client_subject_cn:"-" x_ssl_client_issuer_dn:"-" x_ssl_client_notbefore:"-" x_ssl_client_notafter:"-" x_cf_forwarded_url:"-" traceparent:"-" true_client_ip:"-" x_cf_true_client_ip:"54.86.50.139" x_request_id:"-" x_b3_traceid:"4d06b60d5345477057ae0886a081097c" x_b3_spanid:"57ae0886a081097c" x_b3_parentspanid:"-" b3:"4d06b60d5345477057ae0886a081097c-57ae0886a081097c"

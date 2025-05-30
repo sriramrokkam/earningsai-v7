@@ -16,10 +16,30 @@ from api_client import download_embedding_files, update_completed_files
 from destination_srv import get_destination_service_credentials, generate_token, fetch_destination_details,extract_hana_credentials,extract_aicore_credentials
 from xsuaa_srv import get_xsuaa_credentials, verify_jwt_token, require_auth
 from fastapi import HTTPException  # Ensure HTTPException is imported for error handling
+from flask_wtf.csrf import CSRFProtect
+from csrf_srv import csrf_bp, generate_csrf_token, validate_csrf_token
+
+# CSRF functionality has been disabled. The following lines are commented out.
+# from csrf_srv import fetch_csrf_token_endpoint, validate_csrf_token
 
 # Initialize Flask app
 app = Flask(__name__)
 CORS(app)
+
+# Register the CSRF Blueprint
+app.register_blueprint(csrf_bp)
+
+# Initialize CSRF protection
+csrf = CSRFProtect()
+csrf.init_app(app)
+
+@app.before_request
+def apply_csrf_protection():
+    """Automatically generate CSRF token and validate for protected endpoints."""
+    generate_csrf_token()  # Ensure a CSRF token is generated
+    if request.endpoint in ['api.generate_embeddings', 'api.chat', 'api.upload']:
+        if not validate_csrf_token():
+            return jsonify({"error": "Invalid CSRF token"}), 403
 
 # Load environment variables
 load_dotenv()
@@ -329,11 +349,22 @@ def upload_file():
         logger.error(f"Error in upload: {str(e)}")
         return jsonify({"error": f"Error uploading: {str(e)}"}), 500
 
+# Disable the CSRF token validation endpoint
+# @app.route('/api/get-csrf-token', methods=['HEAD'])
+# def get_csrf_token():
+#     """CSRF - Endpoint to fetch the CSRF token."""
+#     return fetch_csrf_token_endpoint()
+
 @app.route('/api/generate-embeddings', methods=['POST'])
 @require_auth
 def generate_embeddings():
     """Endpoint to generate embeddings for uploaded files."""
     logger.info("Starting embedding generation process")
+
+    # CSRF - Validate CSRF Token
+    # if not validate_csrf_token(request):
+    #     logger.error("Invalid CSRF token")
+    #     return jsonify({"error": "Invalid CSRF token"}), 403
 
     try:
         # Step 1: Download files
@@ -357,8 +388,16 @@ def generate_embeddings():
         logger.info(f"Downloaded {len(downloaded_files)} files: {downloaded_files}")
 
         all_successful_files = True  # Track overall success
+        failed_files = []  # Track failed files
 
-        # Step 2: Process and store embeddings
+        # Step 2: Categorize files
+        transcripts = [f for f in downloaded_files if f.endswith(('.txt', '.docx', '.doc'))]
+        non_transcripts = [f for f in downloaded_files if f.endswith(('.pdf', '.xlsx'))]
+        images = [f for f in downloaded_files if f.endswith(tuple(IMAGE_EXTENSIONS))]
+
+        logger.info(f"Categorized files - Transcripts: {len(transcripts)}, Non-Transcripts: {len(non_transcripts)}, Images: {len(images)}")
+
+        # Step 3: Process and store embeddings for each category
         for file_path in downloaded_files:
             try:
                 logger.info(f"Processing file: {file_path}")
@@ -367,9 +406,10 @@ def generate_embeddings():
             except Exception as e:
                 logger.error(f"Error processing file {file_path}: {e}", exc_info=True)
                 all_successful_files = False  # Mark as failed if any file processing fails
+                failed_files.append(file_path)
                 continue  # Continue with the next file
 
-        # Step 3: Update file statuses only if embeddings were successfully generated
+        # Step 4: Update file statuses only if embeddings were successfully generated
         if all_successful_files:
             logger.info("Updating file statuses to 'Completed'")
             update_completed_files(
@@ -379,14 +419,17 @@ def generate_embeddings():
             )
             logger.info("File statuses updated successfully")
         else:
-            logger.warning("Some files failed to generate embeddings. Skipping status update for those files.")
+            logger.warning(f"Some files failed to generate embeddings. Failed files: {failed_files}")
+            return jsonify({
+                "message": "Embeddings generated with some failures",
+                "failed_files": failed_files
+            }), 206  # Partial success
 
         return jsonify({"message": "Embeddings generated successfully"}), 200
 
     except Exception as e:
         logger.error(f"Error in embedding generation process: {e}", exc_info=True)
         return jsonify({"error": "Failed to generate embeddings", "details": str(e)}), 500
-
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))

@@ -1,5 +1,6 @@
 import secrets
 from flask import request, jsonify, session
+from server import app  # Use the main Flask app from server.py
 
 # CSRF - Generate CSRF Token
 def generate_csrf_token():
@@ -15,10 +16,6 @@ def validate_csrf_token(request):
     return csrf_token == session.get("csrf_token")
 
 # CSRF - Fetch CSRF Token Endpoint
-from flask import Flask
-
-app = Flask(__name__)
-
 @app.route("/csrf-token", methods=["HEAD"])
 def fetch_csrf_token_endpoint():
     """Endpoint to fetch a CSRF token."""

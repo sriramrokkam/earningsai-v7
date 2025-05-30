@@ -16,6 +16,7 @@ from api_client import download_embedding_files, update_completed_files
 from destination_srv import get_destination_service_credentials, generate_token, fetch_destination_details,extract_hana_credentials,extract_aicore_credentials
 from xsuaa_srv import get_xsuaa_credentials, verify_jwt_token, require_auth
 from fastapi import HTTPException  # Ensure HTTPException is imported for error handling
+from csrf_srv import fetch_csrf_token_endpoint, validate_csrf_token  # CSRF - Import CSRF functions
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -329,11 +330,21 @@ def upload_file():
         logger.error(f"Error in upload: {str(e)}")
         return jsonify({"error": f"Error uploading: {str(e)}"}), 500
 
+@app.route('/api/get-csrf-token', methods=['HEAD'])
+def get_csrf_token():
+    """CSRF - Endpoint to fetch the CSRF token."""
+    return fetch_csrf_token_endpoint()
+
 @app.route('/api/generate-embeddings', methods=['POST'])
 @require_auth
 def generate_embeddings():
     """Endpoint to generate embeddings for uploaded files."""
     logger.info("Starting embedding generation process")
+
+    # CSRF - Validate CSRF Token
+    if not validate_csrf_token(request):
+        logger.error("Invalid CSRF token")
+        return jsonify({"error": "Invalid CSRF token"}), 403
 
     try:
         # Step 1: Download files

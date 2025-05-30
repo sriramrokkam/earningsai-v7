@@ -357,8 +357,16 @@ def generate_embeddings():
         logger.info(f"Downloaded {len(downloaded_files)} files: {downloaded_files}")
 
         all_successful_files = True  # Track overall success
+        failed_files = []  # Track failed files
 
-        # Step 2: Process and store embeddings
+        # Step 2: Categorize files
+        transcripts = [f for f in downloaded_files if f.endswith(('.txt', '.docx', '.doc'))]
+        non_transcripts = [f for f in downloaded_files if f.endswith(('.pdf', '.xlsx'))]
+        images = [f for f in downloaded_files if f.endswith(tuple(IMAGE_EXTENSIONS))]
+
+        logger.info(f"Categorized files - Transcripts: {len(transcripts)}, Non-Transcripts: {len(non_transcripts)}, Images: {len(images)}")
+
+        # Step 3: Process and store embeddings for each category
         for file_path in downloaded_files:
             try:
                 logger.info(f"Processing file: {file_path}")
@@ -367,9 +375,10 @@ def generate_embeddings():
             except Exception as e:
                 logger.error(f"Error processing file {file_path}: {e}", exc_info=True)
                 all_successful_files = False  # Mark as failed if any file processing fails
+                failed_files.append(file_path)
                 continue  # Continue with the next file
 
-        # Step 3: Update file statuses only if embeddings were successfully generated
+        # Step 4: Update file statuses only if embeddings were successfully generated
         if all_successful_files:
             logger.info("Updating file statuses to 'Completed'")
             update_completed_files(
@@ -379,7 +388,11 @@ def generate_embeddings():
             )
             logger.info("File statuses updated successfully")
         else:
-            logger.warning("Some files failed to generate embeddings. Skipping status update for those files.")
+            logger.warning(f"Some files failed to generate embeddings. Failed files: {failed_files}")
+            return jsonify({
+                "message": "Embeddings generated with some failures",
+                "failed_files": failed_files
+            }), 206  # Partial success
 
         return jsonify({"message": "Embeddings generated successfully"}), 200
 

@@ -16,15 +16,24 @@ from api_client import download_embedding_files, update_completed_files
 from destination_srv import get_destination_service_credentials, generate_token, fetch_destination_details,extract_hana_credentials,extract_aicore_credentials
 from xsuaa_srv import get_xsuaa_credentials, verify_jwt_token, require_auth
 from fastapi import HTTPException  # Ensure HTTPException is imported for error handling
-from csrf_srv import fetch_csrf_token_endpoint, validate_csrf_token  # CSRF - Import CSRF functions
-from csrf_srv import csrf_bp
+from flask_wtf.csrf import CSRFProtect
+
+# CSRF functionality has been disabled. The following lines are commented out.
+# from csrf_srv import fetch_csrf_token_endpoint, validate_csrf_token
 
 # Initialize Flask app
 app = Flask(__name__)
 CORS(app)
 
-# Register the CSRF Blueprint
-app.register_blueprint(csrf_bp)
+# Initialize CSRF protection
+csrf = CSRFProtect()
+csrf.init_app(app)
+
+# Disable CSRF for specific routes
+@app.before_request
+def disable_csrf():
+    if request.endpoint in ['api.upload_file', 'api.generate_embeddings']:
+        csrf._disable_on_request()
 
 # Load environment variables
 load_dotenv()
@@ -334,10 +343,11 @@ def upload_file():
         logger.error(f"Error in upload: {str(e)}")
         return jsonify({"error": f"Error uploading: {str(e)}"}), 500
 
-@app.route('/api/get-csrf-token', methods=['HEAD'])
-def get_csrf_token():
-    """CSRF - Endpoint to fetch the CSRF token."""
-    return fetch_csrf_token_endpoint()
+# Disable the CSRF token validation endpoint
+# @app.route('/api/get-csrf-token', methods=['HEAD'])
+# def get_csrf_token():
+#     """CSRF - Endpoint to fetch the CSRF token."""
+#     return fetch_csrf_token_endpoint()
 
 @app.route('/api/generate-embeddings', methods=['POST'])
 @require_auth
@@ -346,9 +356,9 @@ def generate_embeddings():
     logger.info("Starting embedding generation process")
 
     # CSRF - Validate CSRF Token
-    if not validate_csrf_token(request):
-        logger.error("Invalid CSRF token")
-        return jsonify({"error": "Invalid CSRF token"}), 403
+    # if not validate_csrf_token(request):
+    #     logger.error("Invalid CSRF token")
+    #     return jsonify({"error": "Invalid CSRF token"}), 403
 
     try:
         # Step 1: Download files
@@ -415,6 +425,10 @@ def generate_embeddings():
         logger.error(f"Error in embedding generation process: {e}", exc_info=True)
         return jsonify({"error": "Failed to generate embeddings", "details": str(e)}), 500
 
+@app.before_request
+def disable_csrf():
+    if request.endpoint in ['api.upload_file', 'api.generate_embeddings']:
+        csrf._disable_on_request()
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))

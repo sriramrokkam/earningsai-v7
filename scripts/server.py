@@ -135,8 +135,8 @@ def store_metadata_in_hana(filename, file_path, file_type, upload_time):
             logger.warning("HANA connection not initialized, skipping metadata storage")
             return False
 
-        #cursor = HANA_CONN.cursor()
-        #cursor.execute("SET SCHEMA {GV_HANA_CREDENTIALS['schema']}")
+        cursor = HANA_CONN.cursor()
+        cursor.execute(f"SET SCHEMA {GV_HANA_CREDENTIALS['schema']}")
         logger.info("Schema set to {GV_HANA_CREDENTIALS['schema']}")
 
         query = """
@@ -356,6 +356,8 @@ def generate_embeddings():
 
         logger.info(f"Downloaded {len(downloaded_files)} files: {downloaded_files}")
 
+        all_successful_files = True  # Track overall success
+
         # Step 2: Process and store embeddings
         for file_path in downloaded_files:
             try:
@@ -364,15 +366,20 @@ def generate_embeddings():
                 logger.info(f"Successfully processed and stored embeddings for file: {file_path}")
             except Exception as e:
                 logger.error(f"Error processing file {file_path}: {e}", exc_info=True)
+                all_successful_files = False  # Mark as failed if any file processing fails
+                continue  # Continue with the next file
 
-        # Step 3: Update file statuses
-        logger.info("Updating file statuses to 'Completed'")
-        update_completed_files(
-            documents_dir=documents_dir,
-            images_dir=images_dir,
-            allowed_extensions=IMAGE_EXTENSIONS
-        )
-        logger.info("File statuses updated successfully")
+        # Step 3: Update file statuses only if embeddings were successfully generated
+        if all_successful_files:
+            logger.info("Updating file statuses to 'Completed'")
+            update_completed_files(
+                documents_dir=documents_dir,
+                images_dir=images_dir,
+                allowed_extensions=IMAGE_EXTENSIONS
+            )
+            logger.info("File statuses updated successfully")
+        else:
+            logger.warning("Some files failed to generate embeddings. Skipping status update for those files.")
 
         return jsonify({"message": "Embeddings generated successfully"}), 200
 

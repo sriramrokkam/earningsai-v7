@@ -1,11 +1,5 @@
-2025-05-30T00:06:30.83+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:06:30,830 - INFO - Token successfully verified and scope present.
-   2025-05-30T00:06:30.83+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:06:30,831 - INFO - Starting embedding generation process
-   2025-05-30T00:06:30.83+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:06:30,831 - INFO - Downloading files for embedding generation
-   2025-05-30T00:06:30.83+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:06:30,831 - INFO - Requesting OAuth token
-   2025-05-30T00:06:30.93+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:06:30,934 - INFO - OAuth token acquired
-   2025-05-30T00:06:30.93+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:06:30,934 - INFO - Fetching file list from https://standard-chartered-bank-core-foundational-12982zqn-gena4b53cb41.cfapps.ap11.hana.ondemand.com/odata/v4/earning-upload-srv/EmbeddingFiles?$filter=status eq 'Approved'
-   2025-05-30T00:06:30.97+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:06:30,974 - INFO - Found 1 Submitted files
-   2025-05-30T00:06:30.97+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:06:30,974 - INFO - Downloading file: BCS_Transcripts_1Q25.pdf from https://standard-chartered-bank-core-foundational-12982zqn-gena4b53cb41.cfapps.ap11.hana.ondemand.com/odata/v4/earning-upload-srv/EmbeddingFiles('fa04bb5ef0c82042aa380925c96fd348beb3259ab0e1e8fd862a9f684022545b')/content
-   2025-05-30T00:06:31.02+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:06:31,021 - INFO - Downloaded: /home/vcap/app/Documents/BCS_Transcripts_1Q25.pdf
-   2025-05-30T00:06:31.02+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:06:31,022 - INFO - All Submitted files processed: 1/1 downloaded successfully
-   2025-05-30T00:06:31.02+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:06:31,022 - ERROR - Expected a list of file paths, but got a different type
+   2025-05-30T00:18:36.10+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:18:36,100 - INFO - Found 1 Submitted files
+   2025-05-30T00:18:36.10+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:18:36,101 - INFO - Downloading file: BCS_Transcripts_1Q25.pdf from https://standard-chartered-bank-core-foundational-12982zqn-gena4b53cb41.cfapps.ap11.hana.ondemand.com/odata/v4/earning-upload-srv/EmbeddingFiles('fa04bb5ef0c82042aa380925c96fd348beb3259ab0e1e8fd862a9f684022545b')/content
+   2025-05-30T00:18:36.16+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:18:36,161 - INFO - Downloaded: /home/vcap/app/Documents/BCS_Transcripts_1Q25.pdf
+   2025-05-30T00:18:36.16+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:18:36,162 - INFO - All Submitted files processed: 1/1 downloaded successfully
+   2025-05-30T00:18:36.16+0000 [APP/PROC/WEB/0] ERR 2025-05-30 00:18:36,162 - ERROR - Expected a list of file paths, but got a different type or empty list

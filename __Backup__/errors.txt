@@ -1,14 +1,20 @@
-
-   2025-05-30T11:21:48.65+0000 [APP/PROC/WEB/0] ERR /home/vcap/deps/0/python/lib/python3.10/site-packages/camelot/parsers/base.py:238: UserWarning: No tables found in table area (0, 0, 612.0, 792.0)
-   2025-05-30T11:21:48.65+0000 [APP/PROC/WEB/0] ERR cols, rows, v_s, h_s = self._generate_columns_and_rows(bbox, user_cols)
-   2025-05-30T11:21:48.74+0000 [APP/PROC/WEB/0] ERR /home/vcap/deps/0/python/lib/python3.10/site-packages/camelot/parsers/base.py:238: UserWarning: No tables found in table area (63.19, 83.0236, 545.1891360000002, 219.90502857142843)
-   2025-05-30T11:21:48.74+0000 [APP/PROC/WEB/0] ERR cols, rows, v_s, h_s = self._generate_columns_and_rows(bbox, user_cols)
-   2025-05-30T11:21:48.89+0000 [APP/PROC/WEB/0] ERR /home/vcap/deps/0/python/lib/python3.10/site-packages/camelot/parsers/base.py:238: UserWarning: No tables found in table area (56.0, 552.1682000000001, 553.9087839999995, 791.9470566037736)
-   2025-05-30T11:21:48.89+0000 [APP/PROC/WEB/0] ERR cols, rows, v_s, h_s = self._generate_columns_and_rows(bbox, user_cols)
-   2025-05-30T11:21:48.89+0000 [APP/PROC/WEB/0] ERR /home/vcap/deps/0/python/lib/python3.10/site-packages/camelot/parsers/base.py:238: UserWarning: No tables found in table area (63.92, 479.3282, 485.2687839999996, 600.9124766037736)
-   2025-05-30T11:21:48.89+0000 [APP/PROC/WEB/0] ERR cols, rows, v_s, h_s = self._generate_columns_and_rows(bbox, user_cols)
-   2025-05-30T11:21:48.96+0000 [APP/PROC/WEB/0] ERR /home/vcap/deps/0/python/lib/python3.10/site-packages/camelot/parsers/base.py:238: UserWarning: No tables found in table area (56.0, 508.0082, 540.1081959999997, 727.4046299999999)
-   2025-05-30T11:21:48.96+0000 [APP/PROC/WEB/0] ERR cols, rows, v_s, h_s = self._generate_columns_and_rows(bbox, user_cols)
-   2025-05-30T11:21:49.33+0000 [APP/PROC/WEB/0] ERR /home/vcap/deps/0/python/lib/python3.10/site-packages/camelot/parsers/base.py:238: UserWarning: No tables found in table area (0, 0, 612.0, 792.0)
-   2025-05-30T11:21:49.33+0000 [APP/PROC/WEB/0] ERR cols, rows, v_s, h_s = self._generate_columns_and_rows(bbox, user_cols)
+"/home/vcap/app/server.py", line 19, in <module>
+   2025-05-30T14:28:18.32+0000 [APP/PROC/WEB/0] ERR from csrf_srv import fetch_csrf_token_endpoint, validate_csrf_token  # CSRF - Import CSRF functions
+   2025-05-30T14:28:18.32+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/app/csrf_srv.py", line 3, in <module>
+   2025-05-30T14:28:18.32+0000 [APP/PROC/WEB/0] ERR from server import app  # Use the main Flask app from server.py
+   2025-05-30T14:28:18.32+0000 [APP/PROC/WEB/0] ERR ImportError: cannot import name 'app' from partially initialized module 'server' (most likely due to a circular import) (/home/vcap/app/server.py)
+   2025-05-30T14:28:18.32+0000 [APP/PROC/WEB/0] ERR [2025-05-30 14:28:18 +0000] [226] [INFO] Worker exiting (pid: 226)
+   2025-05-30T14:28:18.32+0000 [APP/PROC/WEB/0] ERR 2025-05-30 14:28:18 - earnings_analysis - INFO - db_connection.py:148 - Closing all database connections in the pool
+   2025-05-30T14:28:18.32+0000 [APP/PROC/WEB/0] ERR 2025-05-30 14:28:18,322 - INFO - Closing all database connections in the pool
+   2025-05-30T14:28:19.36+0000 [APP/PROC/WEB/0] ERR [2025-05-30 14:28:19 +0000] [8] [ERROR] Worker (pid:226) exited with code 3
+   2025-05-30T14:28:19.37+0000 [APP/PROC/WEB/0] ERR [2025-05-30 14:28:19 +0000] [8] [ERROR] Shutting down: Master
+   2025-05-30T14:28:19.37+0000 [APP/PROC/WEB/0] ERR [2025-05-30 14:28:19 +0000] [8] [ERROR] Reason: Worker failed to boot.
+   2025-05-30T14:28:19.39+0000 [APP/PROC/WEB/0] OUT Exit status 3
+   2025-05-30T14:28:19.39+0000 [CELL/SSHD/0] OUT Exit status 0
+   2025-05-30T14:28:25.04+0000 [CELL/0] OUT Cell a04640fc-9ada-47a6-9da5-f2431201f2e2 stopping instance 333f10e9-ed3c-48f2-6509-51ed
+   2025-05-30T14:28:25.04+0000 [CELL/0] OUT Cell a04640fc-9ada-47a6-9da5-f2431201f2e2 destroying container for instance 333f10e9-ed3c-48f2-6509-51ed
+   2025-05-30T14:28:25.05+0000 [API/16] OUT Process has crashed with type: "web"
+   2025-05-30T14:28:25.07+0000 [API/16] OUT App instance exited with guid cf3674e4-5310-4b27-b141-32d6ae3724ab payload: {"instance"=>"333f10e9-ed3c-48f2-6509-51ed", "index"=>0, "cell_id"=>"a04640fc-9ada-47a6-9da5-f2431201f2e2", "reason"=>"CRASHED", "exit_description"=>"APP/PROC/WEB: Exited with status 3", "crash_count"=>3, "crash_timestamp"=>1748615305035573908, "version"=>"0997aa7b-d260-48f3-85aa-185db21f6157"}
+   2025-05-30T14:28:25.14+0000 [PROXY/0] OUT Exit status 137
+   2025-05-30T14:28:28.40+0000 [CELL/0] OUT Cell a04640fc-9ada-47a6-9da5-f2431201f2e2 successfully destroyed container for instance 333f10e9-ed3c-48f2-6509-51ed
 user: EarningsAI_V7_ST $ 

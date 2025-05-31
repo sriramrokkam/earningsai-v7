@@ -320,6 +320,7 @@ def process_and_store_embeddings(directory_path, force_overwrite_files=None, mod
             elif f in force_overwrite_files:
                 logger.info(f"Forced overwrite requested for Excel {f}")
                 excel_files_to_process.add(f)
+        logger.debug(f"File: {f}, Current Hash: {current_hash}, Existing Hash: {existing_file_info.get(f)}")
     logger.info(f"Found {len(pdf_files_info)} PDF files, {len(pdf_files_to_process)} need processing")
     logger.info(f"Found {len(excel_files_info)} Excel files, {len(excel_files_to_process)} need processing")
     if not pdf_files_to_process and not excel_files_to_process:
@@ -344,6 +345,13 @@ def process_and_store_embeddings(directory_path, force_overwrite_files=None, mod
         ]
         logger.info(f"Filtered to {len(filtered_transcript_embeddings)} PDF transcript embeddings and "
                     f"{len(filtered_non_transcript_embeddings)} PDF non-transcript embeddings for processing")
+
+        # Log the first chunk of embeddings for debugging
+        if filtered_transcript_embeddings:
+            logger.debug(f"First transcript embedding chunk: {filtered_transcript_embeddings[0][1]}")
+        if filtered_non_transcript_embeddings:
+            logger.debug(f"First non-transcript embedding chunk: {filtered_non_transcript_embeddings[0][1]}")
+
         return filtered_transcript_embeddings, filtered_non_transcript_embeddings
 
     # Process Excel files in parallel

@@ -24,6 +24,7 @@ modules:
     properties:
       FLASK_ENV: PRODUCTION
       FLASK_APP: server.py
+      CSRF_SECRET_KEY: ${SECRET_KEY}
     
     # 🔗 Service bindings ( Instances)
     requires:

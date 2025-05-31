@@ -27,7 +27,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Register the CSRF Blueprint
-app.register_blueprint(csrf_bp)
+app.register_blueprint(csrf_bp,url_prefix="/api")
 
 # Initialize CSRF protection
 csrf = CSRFProtect()

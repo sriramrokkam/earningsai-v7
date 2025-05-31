@@ -434,14 +434,6 @@ def generate_embeddings():
 # Set a secret key for the Flask app
 app.secret_key = os.getenv('CSRF_SECRET_KEY', 'EarningsaAI_CSRF_SK')
 
-@csrf_bp.route("/csrf-token", methods=["GET"])
-def fetch_csrf_token_endpoint():
-    csrf_token = generate_csrf_token()
-    response = jsonify({"message": "CSRF token fetched"})
-    response.headers["X-CSRF-Token"] = csrf_token
-    response.headers["Access-Control-Expose-Headers"] = "X-CSRF-Token"
-    return response, 200
-
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
     logger.info(f"Starting Flask app on port {port}")

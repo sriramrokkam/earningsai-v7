@@ -10,7 +10,6 @@ import camelot
 import tabula
 from logger_setup import get_logger
 import re
-from concurrent.futures import ThreadPoolExecutor  # For parallel processing
 from env_config import TABLE_NAMES, EMBEDDING_MODEL
 from destination_srv import get_destination_service_credentials, generate_token, fetch_destination_details,extract_aicore_credentials
 
@@ -273,16 +272,14 @@ def process_all_pdfs(directory, model="text-embedding-3-large"):
         embeddings = process_pdf_with_embeddings(pdf_path, model)
         return embeddings, is_transcript
 
-    # Use ThreadPoolExecutor for parallel processing
-    with ThreadPoolExecutor(max_workers=4) as executor:  # Adjust max_workers as needed
-        futures = [executor.submit(process_single_pdf, pdf) for pdf in pdf_files]
-        for future in futures:
-            embeddings, is_transcript = future.result()
-            if embeddings:
-                if is_transcript:
-                    transcript_embeddings.extend(embeddings)
-                else:
-                    non_transcript_embeddings.extend(embeddings)
+    # Replacing ThreadPoolExecutor with sequential processing
+    for pdf in pdf_files:
+        embeddings, is_transcript = process_single_pdf(pdf)
+        if embeddings:
+            if is_transcript:
+                transcript_embeddings.extend(embeddings)
+            else:
+                non_transcript_embeddings.extend(embeddings)
 
     print(f"\nTotal transcript embeddings: {len(transcript_embeddings)}")
     print(f"Total non-transcript embeddings: {len(non_transcript_embeddings)}")

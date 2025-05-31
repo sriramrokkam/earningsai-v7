@@ -17,10 +17,7 @@ from destination_srv import get_destination_service_credentials, generate_token,
 from xsuaa_srv import get_xsuaa_credentials, verify_jwt_token, require_auth
 from fastapi import HTTPException  # Ensure HTTPException is imported for error handling
 from flask_wtf.csrf import CSRFProtect
-from csrf_srv import csrf_bp, generate_csrf_token, validate_csrf_token
-
-# CSRF functionality has been disabled. The following lines are commented out.
-# from csrf_srv import fetch_csrf_token_endpoint, validate_csrf_token
+from csrf_srv import csrf_bp, generate_csrf_token, validate_csrf_token, fetch_csrf_token_endpoint
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -350,10 +347,10 @@ def upload_file():
         return jsonify({"error": f"Error uploading: {str(e)}"}), 500
 
 # Disable the CSRF token validation endpoint
-# @app.route('/api/get-csrf-token', methods=['HEAD'])
-# def get_csrf_token():
-#     """CSRF - Endpoint to fetch the CSRF token."""
-#     return fetch_csrf_token_endpoint()
+@app.route('/api/get-csrf-token', methods=['HEAD'])
+def get_csrf_token():
+    """CSRF - Endpoint to fetch the CSRF token."""
+    return fetch_csrf_token_endpoint()
 
 @app.route('/api/generate-embeddings', methods=['POST'])
 @require_auth

@@ -1,25 +1,3 @@
-2025-05-31T03:01:22.20+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/app/server.py", line 437, in <module>
-   2025-05-31T03:01:22.20+0000 [APP/PROC/WEB/0] ERR @csrf_bp.route("/csrf-token", methods=["GET"])
-   2025-05-31T03:01:22.20+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/flask/sansio/scaffold.py", line 46, in wrapper_func
-   2025-05-31T03:01:22.20+0000 [APP/PROC/WEB/0] ERR self._check_setup_finished(f_name)
-   2025-05-31T03:01:22.20+0000 [APP/PROC/WEB/0] ERR File "/home/vcap/deps/0/python/lib/python3.10/site-packages/flask/sansio/blueprints.py", line 215, in _check_setup_finished
-   2025-05-31T03:01:22.20+0000 [APP/PROC/WEB/0] ERR raise AssertionError(
-   2025-05-31T03:01:22.20+0000 [APP/PROC/WEB/0] ERR AssertionError: The setup method 'route' can no longer be called on the blueprint 'csrf'. It has already been registered at least once, any changes will not be applied consistently.
-   2025-05-31T03:01:22.20+0000 [APP/PROC/WEB/0] ERR Make sure all imports, decorators, functions, etc. needed to set up the blueprint are done before registering it.
-   2025-05-31T03:01:22.20+0000 [APP/PROC/WEB/0] ERR [2025-05-31 03:01:22 +0000] [226] [INFO] Worker exiting (pid: 226)
-   2025-05-31T03:01:22.20+0000 [APP/PROC/WEB/0] ERR 2025-05-31 03:01:22 - earnings_analysis - INFO - db_connection.py:148 - Closing all database connections in the pool
-   2025-05-31T03:01:22.20+0000 [APP/PROC/WEB/0] ERR 2025-05-31 03:01:22,204 - INFO - Closing all database connections in the pool
-   2025-05-31T03:01:22.20+0000 [APP/PROC/WEB/0] ERR 2025-05-31 03:01:22 - earnings_analysis - INFO - db_connection.py:125 - Closed connection from pool
-   2025-05-31T03:01:22.20+0000 [APP/PROC/WEB/0] ERR 2025-05-31 03:01:22,206 - INFO - Closed connection from pool
-   2025-05-31T03:01:23.18+0000 [APP/PROC/WEB/0] ERR [2025-05-31 03:01:23 +0000] [7] [ERROR] Worker (pid:226) exited with code 3
-   2025-05-31T03:01:23.18+0000 [APP/PROC/WEB/0] ERR [2025-05-31 03:01:23 +0000] [7] [ERROR] Shutting down: Master
-   2025-05-31T03:01:23.18+0000 [APP/PROC/WEB/0] ERR [2025-05-31 03:01:23 +0000] [7] [ERROR] Reason: Worker failed to boot.
-   2025-05-31T03:01:23.20+0000 [APP/PROC/WEB/0] OUT Exit status 3
-   2025-05-31T03:01:23.21+0000 [CELL/SSHD/0] OUT Exit status 0
-   2025-05-31T03:01:28.99+0000 [CELL/0] OUT Cell 9b71344f-3e52-44eb-bdd0-6cb9300eafa1 stopping instance dd57ffb5-7d54-447a-6ddb-fd19
-   2025-05-31T03:01:28.99+0000 [CELL/0] OUT Cell 9b71344f-3e52-44eb-bdd0-6cb9300eafa1 destroying container for instance dd57ffb5-7d54-447a-6ddb-fd19
-   2025-05-31T03:01:29.01+0000 [API/5] OUT Process has crashed with type: "web"
-   2025-05-31T03:01:29.02+0000 [API/5] OUT App instance exited with guid cf3674e4-5310-4b27-b141-32d6ae3724ab payload: {"instance"=>"dd57ffb5-7d54-447a-6ddb-fd19", "index"=>0, "cell_id"=>"9b71344f-3e52-44eb-bdd0-6cb9300eafa1", "reason"=>"CRASHED", "exit_description"=>"APP/PROC/WEB: Exited with status 3", "crash_count"=>4, "crash_timestamp"=>1748660488987601705, "version"=>"b30a3fe0-1867-4b43-94ba-3c98de0f7a76"}
-   2025-05-31T03:01:29.09+0000 [PROXY/0] OUT Exit status 137
-   2025-05-31T03:01:32.51+0000 [CELL/0] OUT Cell 9b71344f-3e52-44eb-bdd0-6cb9300eafa1 successfully destroyed container for instance dd57ffb5-7d54-447a-6ddb-fd19
-user: EarningsAI_V7_ST $ 
+ 2025-05-31T03:16:52.60+0000 [APP/PROC/WEB/0] ERR 2025-05-31 03:16:52,607 - INFO - All vector stores loaded successfully
+   2025-05-31T03:17:59.01+0000 [APP/PROC/WEB/0] OUT 10.136.44.133 - - [31/May/2025:03:17:59 +0000] "HEAD /api/csrf-token HTTP/1.1" 404 0 "-" "PostmanRuntime/7.44.0"
+   2025-05-31T03:17:59.01+0000 [RTR/0] OUT earningsai-asst-srv6.cfapps.ap11.hana.ondemand.com - [2025-05-31T03:17:59.002292367Z] "HEAD /api/csrf-token HTTP/1.1" 404 0 0 "-" "PostmanRuntime/7.44.0" "10.0.72.1:21514" "10.0.201.25:61003" x_forwarded_for:"54.86.50.139, 10.0.72.1" x_forwarded_proto:"https" vcap_request_id:"71cdd5bd-0790-4a7f-7aba-9b3c53e6d22b" response_time:0.010703 gorouter_time:0.000059 app_id:"cf3674e4-5310-4b27-b141-32d6ae3724ab" app_index:"0" instance_id:"8e695504-352b-40b8-5d1b-6457" failed_attempts:0 failed_attempts_time:"-" dns_time:0.000000 dial_time:0.000887 tls_time:0.005953 backend_time:0.010644 local_address:"10.0.65.8:59208" x_cf_routererror:"-" x_correlationid:"-" tenantid:"-" sap_passport:"-" x_scp_request_id:"b29c1409-1960-4ea6-9a0b-7c2413b93e99-683A74E6-17EA136" x_cf_app_instance:"-" x_forwarded_host:"-" x_custom_host:"-" x_ssl_client:"-" x_ssl_client_session_id:"-" x_ssl_client_verify:"-" x_ssl_client_subject_dn:"-" x_ssl_client_subject_cn:"-" x_ssl_client_issuer_dn:"-" x_ssl_client_notbefore:"-" x_ssl_client_notafter:"-" x_cf_forwarded_url:"-" traceparent:"-" true_client_ip:"-" x_cf_true_client_ip:"54.86.50.139" x_request_id:"-" x_b3_traceid:"71cdd5bd07904a7f7aba9b3c53e6d22b" x_b3_spanid:"7aba9b3c53e6d22b" x_b3_parentspanid:"-" b3:"71cdd5bd07904a7f7aba9b3c53e6d22b-7aba9b3c53e6d22b"

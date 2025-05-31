@@ -431,6 +431,9 @@ def generate_embeddings():
         logger.error(f"Error in embedding generation process: {e}", exc_info=True)
         return jsonify({"error": "Failed to generate embeddings", "details": str(e)}), 500
 
+# Set a secret key for the Flask app
+app.secret_key = os.getenv('CSRF_SECRET_KEY', 'EarningsaAI_CSRF_SK')
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
     logger.info(f"Starting Flask app on port {port}")
